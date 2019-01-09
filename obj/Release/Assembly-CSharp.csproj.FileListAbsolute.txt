@@ -1,0 +1,2 @@
+D:\Eigene Dateien\OneDrive\Documents\Mobile_Augmented_Reality\EscapeRoomNew\obj\Release\Assembly-CSharp.csprojAssemblyReference.cache
+D:\Eigene Dateien\OneDrive\Documents\Mobile_Augmented_Reality\EscapeRoomNew\obj\Release\Assembly-CSharp.csproj.CoreCompileInputs.cache
