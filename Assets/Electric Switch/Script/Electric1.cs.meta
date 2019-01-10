@@ -1,11 +1,14 @@
 fileFormatVersion: 2
 guid: 25f7b32600f99264ba92e03eaf522299
-timeCreated: 1517992863
-licenseType: Store
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - lightOn_Material: {fileID: 2100000, guid: f254b3c69d5985f48bd7fa82cd6fad0b, type: 2}
+  - lightOff_Material: {fileID: 2100000, guid: 62d51e020459e3a4b907e0ee118bf3bb, type: 2}
+  - tick_sound: {instanceID: 0}
+  - button_Sound: {instanceID: 0}
+  - complete_sound: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

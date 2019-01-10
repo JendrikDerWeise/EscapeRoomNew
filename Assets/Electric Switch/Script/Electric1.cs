@@ -130,43 +130,43 @@ public class Electric1 : MonoBehaviour
         for (int i = 0; i < 10; i++)
         {
             lights[i].GetComponent<MeshRenderer>().material = lightOff_Material;
-            Behaviour halo = (Behaviour)lights[i].GetComponent("Halo");
-            halo.enabled = false;
+           // Behaviour halo = (Behaviour)lights[i].GetComponent("Halo");
+            //halo.enabled = false;
         }
         yield return new WaitForSeconds(0.35f);
         for (int i = 0; i < 10; i++)
         {
             lights[i].GetComponent<MeshRenderer>().material = lightOn_Material;
-            Behaviour halo = (Behaviour)lights[i].GetComponent("Halo");
-            halo.enabled = true;
+            //Behaviour halo = (Behaviour)lights[i].GetComponent("Halo");
+            //halo.enabled = true;
         }
         yield return new WaitForSeconds(0.35f);
         for (int i = 0; i < 10; i++)
         {
             lights[i].GetComponent<MeshRenderer>().material = lightOff_Material;
-            Behaviour halo = (Behaviour)lights[i].GetComponent("Halo");
-            halo.enabled = false;
+           // Behaviour halo = (Behaviour)lights[i].GetComponent("Halo");
+            //halo.enabled = false;
         }
         yield return new WaitForSeconds(0.35f);
         for (int i = 0; i < 10; i++)
         {
             lights[i].GetComponent<MeshRenderer>().material = lightOn_Material;
-            Behaviour halo = (Behaviour)lights[i].GetComponent("Halo");
-            halo.enabled = true;
+           // Behaviour halo = (Behaviour)lights[i].GetComponent("Halo");
+          //  halo.enabled = true;
         }
         yield return new WaitForSeconds(0.35f);
         for (int i = 0; i < 10; i++)
         {
             lights[i].GetComponent<MeshRenderer>().material = lightOff_Material;
-            Behaviour halo = (Behaviour)lights[i].GetComponent("Halo");
-            halo.enabled = false;
+           // Behaviour halo = (Behaviour)lights[i].GetComponent("Halo");
+            //halo.enabled = false;
         }
         yield return new WaitForSeconds(0.5f);
         for (int i = 0; i < 10; i++)
         {
             lights[i].GetComponent<MeshRenderer>().material = lightOn_Material;
-            Behaviour halo = (Behaviour)lights[i].GetComponent("Halo");
-            halo.enabled = true;
+            //Behaviour halo = (Behaviour)lights[i].GetComponent("Halo");
+           // halo.enabled = true;
         }
         audioSource.PlayOneShot(complete_sound);
 
@@ -194,14 +194,14 @@ public class Electric1 : MonoBehaviour
                 if (i < Mathf.RoundToInt(timeLight))
                 {
                     lights[i].GetComponent<MeshRenderer>().material = lightOn_Material;
-                    Behaviour halo = (Behaviour)lights[i].GetComponent("Halo");
-                    halo.enabled = true;
+                   // Behaviour halo = (Behaviour)lights[i].GetComponent("Halo");
+                  //  halo.enabled = true;
                 }
                 else
                 {
                     lights[i].GetComponent<MeshRenderer>().material = lightOff_Material;
-                    Behaviour halo = (Behaviour)lights[i].GetComponent("Halo");
-                    halo.enabled = false;
+                   // Behaviour halo = (Behaviour)lights[i].GetComponent("Halo");
+                    //halo.enabled = false;
                 }
             }
         }
@@ -212,8 +212,8 @@ public class Electric1 : MonoBehaviour
             for (int i = 0; i < 10; i++)
             {
                 lights[i].GetComponent<MeshRenderer>().material = lightOn_Material;
-                Behaviour halo = (Behaviour)lights[i].GetComponent("Halo");
-                halo.enabled = true;
+              //  Behaviour halo = (Behaviour)lights[i].GetComponent("Halo");
+               // halo.enabled = true;
             }
             gamePause = true;
             StartCoroutine(WaitAndPrint());

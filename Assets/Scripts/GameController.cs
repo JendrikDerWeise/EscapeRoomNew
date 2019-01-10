@@ -8,7 +8,7 @@ using HoloToolkit.Unity.SpatialMapping;
 
 public class GameController : MonoBehaviour {
     public static GameController instance;
-
+    int round = 0;
     #region GameObjects to control
     [SerializeField] public GameObject doorlock;
     [SerializeField] public GameObject box;
@@ -167,6 +167,13 @@ public class GameController : MonoBehaviour {
         {
             sc.PlayClip(sc.raise);
             box.GetComponent<Box>().SpawnNextPuzzle();
+            
+            if (round > 0)
+            {
+                box.GetComponent<Box>().ShowNextNumber(UnityEngine.Random.Range(0, 10));
+
+            }
+            round++;
         }
         else
             sc.PlayClip(sc.win);//WinScreen
@@ -182,7 +189,7 @@ public class GameController : MonoBehaviour {
     {
         solution = new int[solvedPuzzles.Length];
         for(int i = 0; i < solution.Length; i++) 
-            solution[i] = UnityEngine.Random.Range(0, 9);
+            solution[i] = UnityEngine.Random.Range(0, 10);
     }
 
     private void CheckTimer()
@@ -209,9 +216,11 @@ public class GameController : MonoBehaviour {
         {
             if (go.activeSelf)
             {
-                int nextNumber = Array.FindIndex(solvedPuzzles, x => x.Equals(go));
-                box.GetComponent<Box>().ShowNextNumber(solution[nextNumber]);
+                //int nextNumber = Array.FindIndex(solvedPuzzles, x => x.Equals(go));
+                //box.GetComponent<Box>().ShowNextNumber(solution[nextNumber]);
+                box.GetComponent<Box>().ShowNextNumber(UnityEngine.Random.Range(0, 10));
             }
+            box.GetComponent<Box>().ShowNextNumber(UnityEngine.Random.Range(0, 10));
         }
     }
 
