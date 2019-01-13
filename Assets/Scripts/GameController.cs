@@ -5,8 +5,9 @@ using UnityEngine;
 using UnityEngine.Windows.Speech;
 using System.Linq;
 using HoloToolkit.Unity.SpatialMapping;
+using UnityEngine.Networking;
 
-public class GameController : MonoBehaviour {
+public class GameController : NetworkBehaviour {
     public static GameController instance;
     int round = 0;
     #region GameObjects to control
@@ -51,9 +52,9 @@ public class GameController : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        box = GameObject.FindGameObjectWithTag("Box");
-        doorlock = GameObject.FindGameObjectWithTag("Pad");
-        
+        //if(isServer)
+            //MakeSolution(); SYNCHRONISIEREN!!!!!!!!!!!
+
         MakeSolution();
         //VoiceOver Ansage 1
         //SpawnBox();
@@ -96,7 +97,61 @@ public class GameController : MonoBehaviour {
             box.GetComponentInParent<TapToPlace>().enabled = false;
             box.GetComponentInParent<BoxCollider>().enabled = false;
         });
-        
+
+        keywordRecognizer = new KeywordRecognizer(keywords.Keys.ToArray());
+        keywordRecognizer.OnPhraseRecognized += KeywordReconizeOnPhraseReconized;
+        keywordRecognizer.Start();
+
+        StartNextPuzzle();
+        StartPauseTimer();
+    }
+
+    [ClientRpc]
+    void RpcStart()
+    {
+        MakeSolution();
+        //VoiceOver Ansage 1
+        //SpawnBox();
+        //Warten auf Box
+        //SpawnLock();
+        //Warten auf Lock
+        //VoiceOver Ansage 2
+
+        //StartPauseTimer();
+        sc = GetComponent<SoundController>();
+        currentTime = startingTime;
+        bStart = win = pause = false;
+
+        keywords.Add("Next", () => {
+            StartNextPuzzle(); //&&solvedPuzzles.Length == 2
+        });
+
+        keywords.Add("Pause", () => {
+            if (!pause)
+            {
+                StartPauseTimer();
+                pause = !pause;
+            }
+        });
+
+        keywords.Add("Anti Pause", () => {
+            if (pause)
+            {
+                StartPauseTimer();
+                pause = !pause;
+            }
+        });
+
+        keywords.Add("Move box", () => {
+            box.GetComponentInParent<TapToPlace>().enabled = true;
+            box.GetComponentInParent<BoxCollider>().enabled = true;
+        });
+
+        keywords.Add("Stop moving box", () => {
+            box.GetComponentInParent<TapToPlace>().enabled = false;
+            box.GetComponentInParent<BoxCollider>().enabled = false;
+        });
+
         keywordRecognizer = new KeywordRecognizer(keywords.Keys.ToArray());
         keywordRecognizer.OnPhraseRecognized += KeywordReconizeOnPhraseReconized;
         keywordRecognizer.Start();
@@ -187,9 +242,12 @@ public class GameController : MonoBehaviour {
 
     private void MakeSolution()
     {
+        if (!isServer)
+            return;
+
         solution = new int[solvedPuzzles.Length];
         for(int i = 0; i < solution.Length; i++) 
-            solution[i] = UnityEngine.Random.Range(0, 10);
+            solution[i] = UnityEngine.Random.Range(0, 9);
     }
 
     private void CheckTimer()

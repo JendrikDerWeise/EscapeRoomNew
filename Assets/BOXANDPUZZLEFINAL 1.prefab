@@ -304,6 +304,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1070935706682134
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4654246934834760}
+  - component: {fileID: 108302473638599448}
+  m_Layer: 0
+  m_Name: Directional Light
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1086343950821540
 GameObject:
   m_ObjectHideFlags: 1
@@ -381,6 +397,9 @@ GameObject:
   - component: {fileID: 114291417139421386}
   - component: {fileID: 114768780546391168}
   - component: {fileID: 114363108016534944}
+  - component: {fileID: 114191202783799616}
+  - component: {fileID: 114459379720728294}
+  - component: {fileID: 114577815161335574}
   m_Layer: 0
   m_Name: BOXANDPUZZLEFINAL 1
   m_TagString: Untagged
@@ -3916,6 +3935,19 @@ Transform:
   m_Father: {fileID: 4533675620399834}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4654246934834760
+Transform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1070935706682134}
+  m_LocalRotation: {x: 0.5531133, y: 0.10426207, z: -0.0700216, w: 0.823585}
+  m_LocalPosition: {x: 0, y: 2.08, z: -0.076}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4736049284564310}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 67.77, y: 14.43, z: 0}
 --- !u!4 &4676338041835380
 Transform:
   m_ObjectHideFlags: 1
@@ -4062,13 +4094,14 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1124032871243504}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -1.9000328, y: -2.30128, z: -4.268737}
   m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
   m_Children:
   - {fileID: 224832430355420576}
   - {fileID: 4996819989184718}
   - {fileID: 4865457465344688}
   - {fileID: 4742951377528198}
+  - {fileID: 4654246934834760}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -9851,6 +9884,43 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!108 &108302473638599448
+Light:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1070935706682134}
+  m_Enabled: 1
+  serializedVersion: 8
+  m_Type: 1
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Intensity: 1
+  m_Range: 10
+  m_SpotAngle: 30
+  m_CookieSize: 10
+  m_Shadows:
+    m_Type: 2
+    m_Resolution: -1
+    m_CustomResolution: -1
+    m_Strength: 1
+    m_Bias: 0.05
+    m_NormalBias: 0.4
+    m_NearPlane: 0.2
+  m_Cookie: {fileID: 0}
+  m_DrawHalo: 0
+  m_Flare: {fileID: 0}
+  m_RenderMode: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_Lightmapping: 4
+  m_LightShadowCasterMode: 0
+  m_AreaSize: {x: 1, y: 1}
+  m_BounceIntensity: 1
+  m_ColorTemperature: 6570
+  m_UseColorTemperature: 0
+  m_ShadowRadius: 0
+  m_ShadowAngle: 0
 --- !u!111 &111460437689996306
 Animation:
   m_ObjectHideFlags: 1
@@ -10132,6 +10202,38 @@ MonoBehaviour:
   requireGaze: 1
   MainCollider: {fileID: 65194732040670690}
   MainRenderer: {fileID: 23640628260083392}
+--- !u!114 &114191202783799616
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1124032871243504}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 16
+    i1: 86
+    i2: 202
+    i3: 131
+    i4: 16
+    i5: 180
+    i6: 231
+    i7: 212
+    i8: 235
+    i9: 116
+    i10: 253
+    i11: 48
+    i12: 55
+    i13: 196
+    i14: 253
+    i15: 39
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 0
 --- !u!114 &114195542452419754
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -10619,6 +10721,27 @@ MonoBehaviour:
   openSound: {fileID: 8300000, guid: 0c7e19fe533789a4d84157467cb4ea93, type: 3}
   solved: {fileID: 1086343950821540}
   electricWavePuzzle: {fileID: 114506962168479710}
+--- !u!114 &114459379720728294
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1124032871243504}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1768714887, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_TransformSyncMode: 1
+  m_SendInterval: 0.1
+  m_SyncRotationAxis: 7
+  m_RotationSyncCompression: 0
+  m_SyncSpin: 0
+  m_MovementTheshold: 0.001
+  m_VelocityThreshold: 0.0001
+  m_SnapThreshold: 5
+  m_InterpolateRotation: 1
+  m_InterpolateMovement: 1
 --- !u!114 &114469389714538554
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -10829,6 +10952,17 @@ MonoBehaviour:
   requireGaze: 1
   MainCollider: {fileID: 65577601201545478}
   MainRenderer: {fileID: 23172426072110228}
+--- !u!114 &114577815161335574
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1124032871243504}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ab75657da0db7e4e9e2fee517f57efb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114591743933955322
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -11041,7 +11175,7 @@ MonoBehaviour:
   DefaultGazeDistance: 2
   PlaceParentOnTap: 0
   ParentGameObjectToPlace: {fileID: 0}
-  IsBeingPlaced: 1
+  IsBeingPlaced: 0
   AllowMeshVisualizationControl: 1
   UseColliderCenter: 0
 --- !u!114 &114769641722707236

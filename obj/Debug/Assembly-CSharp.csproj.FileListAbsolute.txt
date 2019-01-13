@@ -111,3 +111,6 @@ C:\Users\Jendrik\Documents\GitHub\Mobile_Augmented_Reality\EscapeRoomNew\Temp\bi
 C:\Users\Jendrik\Documents\GitHub\Mobile_Augmented_Reality\EscapeRoomNew\obj\Debug\Assembly-CSharp.csprojResolveAssemblyReference.cache
 C:\Users\Jendrik\Documents\GitHub\Mobile_Augmented_Reality\EscapeRoomNew\obj\Debug\Assembly-CSharp.dll
 C:\Users\Jendrik\Documents\GitHub\Mobile_Augmented_Reality\EscapeRoomNew\obj\Debug\Assembly-CSharp.pdb
+C:\Users\Jendrik\Documents\GitHub\EscapeRoomNew\obj\Debug\Assembly-CSharp.csprojResolveAssemblyReference.cache
+C:\Users\Jendrik\Documents\GitHub\EscapeRoomNew\obj\Debug\Assembly-CSharp.dll
+C:\Users\Jendrik\Documents\GitHub\EscapeRoomNew\obj\Debug\Assembly-CSharp.pdb

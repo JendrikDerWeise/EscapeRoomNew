@@ -381,3 +381,5 @@ C:\Users\Jendrik\Documents\GitHub\Mobile_Augmented_Reality\EscapeRoomNew\UWP\Esc
 C:\Users\Jendrik\Documents\GitHub\Mobile_Augmented_Reality\EscapeRoomNew\UWP\EscapeRoomNew\obj\x86\Release\Symbols\GLTFSerializationUWP.pdb
 C:\Users\Jendrik\Documents\GitHub\Mobile_Augmented_Reality\EscapeRoomNew\UWP\EscapeRoomNew\obj\x86\Release\Symbols\UnityEngine.TestRunner.pdb
 C:\Users\Jendrik\Documents\GitHub\Mobile_Augmented_Reality\EscapeRoomNew\UWP\EscapeRoomNew\obj\x86\Release\Symbols\Assembly-CSharp.pdb
+C:\Users\Jendrik\Documents\GitHub\EscapeRoomNew\UWP\EscapeRoomNew\obj\x86\Release\EscapeRoomNew.exe
+C:\Users\Jendrik\Documents\GitHub\EscapeRoomNew\UWP\EscapeRoomNew\obj\x86\Release\EscapeRoomNew.pdb

@@ -26,7 +26,6 @@ public class ObjectPlacer : MonoBehaviour
     public GameObject gameController;
     public GameObject boxPrefab;
     public GameObject padPrefab;
-    public MySyncObjectSpawner objectSpawner;
 
     private GameObject box;
     private GameObject pad;
@@ -98,9 +97,8 @@ public class ObjectPlacer : MonoBehaviour
         float spawnDistance = 1.8f;
 
         Vector3 spawnPos = playerPos + playerDirection * spawnDistance;
-
+       
         GameObject spawned = Instantiate(go, spawnPos, playerRotation);
-        //box = objectSpawner.SpawnBox(spawnPos, playerRotation);
 
         return spawned;
     }
@@ -110,7 +108,7 @@ public class ObjectPlacer : MonoBehaviour
         SpatialUnderstandingMesh.DrawProcessedMesh = false;
     }
 
-    public void CreateScene(GameObject menu)
+    public void CreateScene()
     {
         // Only if we're enabled
         if (!SpatialUnderstanding.Instance.AllowSpatialUnderstanding)
@@ -123,7 +121,6 @@ public class ObjectPlacer : MonoBehaviour
         SpatialUnderstandingState.Instance.SpaceQueryDescription = "Generating World";
         _timeToHideMesh = true;
         isPlacingStarted = true;
-        menu.SetActive(false);
 
 
         //Ab HIER alles weg machen und Objekte über Tap to Place plazieren. In Update wenn GameController !isActive, !boxplaced, !pincodeplaced (pincode taptoplace abschalten)

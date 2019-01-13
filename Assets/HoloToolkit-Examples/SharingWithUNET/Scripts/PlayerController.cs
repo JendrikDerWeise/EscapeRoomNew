@@ -11,9 +11,11 @@ namespace HoloToolkit.Unity.SharingWithUNET
     /// Controls player behavior (local and remote).
     /// </summary>
     [NetworkSettings(sendInterval = 0.033f)]
-    public class PlayerController : NetworkBehaviour, IInputClickHandler
+    public class PlayerController : NetworkBehaviour
     {
-        private static PlayerController _Instance = null;
+        private GameObject spawnMenu;
+        private bool spawnMenuIsSet;
+        public static PlayerController _Instance = null;
         /// <summary>
         /// Instance of the PlayerController that represents the local player.
         /// </summary>
@@ -83,6 +85,7 @@ namespace HoloToolkit.Unity.SharingWithUNET
         private void CmdSendAnchorEstablished(bool Established)
         {
             AnchorEstablished = Established;
+            
             if (Established && SharesSpatialAnchors && !isLocalPlayer)
             {
                 Debug.Log("remote device likes the anchor");
@@ -213,7 +216,7 @@ namespace HoloToolkit.Unity.SharingWithUNET
             {
                 // If we are the local player then we want to have airtaps 
                 // sent to this object so that projectiles can be spawned.
-                InputManager.Instance.AddGlobalListener(gameObject);
+                //InputManager.Instance.AddGlobalListener(gameObject);
                 InitializeLocalPlayer();
             }
             else
@@ -226,6 +229,9 @@ namespace HoloToolkit.Unity.SharingWithUNET
 
             sharedWorldAnchorTransform = SharedCollection.Instance.gameObject.transform;
             transform.SetParent(sharedWorldAnchorTransform);
+
+            
+            
         }
 
         private void Update()
@@ -264,6 +270,22 @@ namespace HoloToolkit.Unity.SharingWithUNET
             // For UNET we use a command to signal the host to update our local position
             // and rotation
             CmdTransform(transform.localPosition, transform.localRotation);
+
+            if(spawnMenu == null)
+                spawnMenu = GameObject.FindGameObjectWithTag("anchorflag");
+
+            if (spawnMenu != null && !spawnMenuIsSet)
+                SetSpawnMenu();
+        }
+
+        private void SetSpawnMenu()
+        {
+            spawnMenu.GetComponent<SpawnMenu>().AnchorEstablished = AnchorEstablished;
+
+            if (!isServer)
+                spawnMenu.SetActive(false);
+
+            spawnMenuIsSet = true;
         }
 
         /// <summary>
@@ -327,13 +349,7 @@ namespace HoloToolkit.Unity.SharingWithUNET
             Destroy(nextBullet, 8.0f);
         }
 
-        public void OnInputClicked(InputClickedEventData eventData)
-        {
-            if (isLocalPlayer)
-            {
-                CmdFire();
-            }
-        }
+       
 
         [Command]
         private void CmdSendSharedTransform(GameObject target, Vector3 pos, Quaternion rot)

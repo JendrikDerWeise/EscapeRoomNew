@@ -599,7 +599,7 @@ Prefab:
     - target: {fileID: 102224615998550350, guid: 1ef2b145dc4d8314fb6957ee53fe6384,
         type: 2}
       propertyPath: m_Text
-      value: Play
+      value: Play single local
       objectReference: {fileID: 0}
     - target: {fileID: 102873117032317046, guid: 1ef2b145dc4d8314fb6957ee53fe6384,
         type: 2}
@@ -725,7 +725,7 @@ GameObject:
   - component: {fileID: 1383399546}
   - component: {fileID: 1383399545}
   m_Layer: 0
-  m_Name: JoinButton
+  m_Name: Play Multiplayer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -917,7 +917,7 @@ TextMesh:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1397559919}
-  m_Text: Join
+  m_Text: Play Multiplayer
   m_OffsetZ: 0
   m_CharacterSize: 1
   m_LineSpacing: 1

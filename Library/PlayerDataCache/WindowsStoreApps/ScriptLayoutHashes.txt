@@ -4,7 +4,7 @@ I:/ARoomescape BUILD
 SceneListBegin?
 Assets/Scenes/Menu 3D.unity
 Assets/Scenes/Scene1.unity
-Assets/Scenes/ClientScene.unity
+Assets/HoloToolkit-Examples/SharingWithUNET/Scenes/SharingWithUnetExample.unity
 SceneListEnd?
 ab86c8456243fdb59d45baddbcc23b95 Assembly-CSharp.dll:HoloToolkit.Unity.SceneLauncher
 486cd95c82d8305219c352c06b776e1f Assembly-CSharp.dll:HoloToolkit.Unity.UX.BoundingBoxGizmoHandle
@@ -255,7 +255,7 @@ f7a8d589314f8d84f829f5557585f4ff Assembly-CSharp.dll:HoloToolkit.Examples.Protot
 1ddce82dbe4a0872eb1ba38f6ac4ecbf Assembly-CSharp.dll:.InventoryController_Fuse
 ac13852fa27bf94761841196a55c7a0d Assembly-CSharp.dll:HoloToolkit.Examples.InteractiveElements.LabelTheme
 486cd95c82d8305219c352c06b776e1f Assembly-CSharp.dll:HoloToolkit.Unity.InputModule.Tests.TextToSpeechOnTapTest
-c97d6910a66b2d03641460a9a2513e83 Assembly-CSharp.dll:.SpatialUnderstandingState
+a6b0677ed4966aa60c543d1d4b82b776 Assembly-CSharp.dll:.SpatialUnderstandingState
 182e416670915c50a548c38c642db0d8 Vuforia.UnityExtensions.dll:Vuforia.AnchorBehaviour
 f35860350df72508419d9f9fcd288594 Vuforia.UnityExtensions.dll:Vuforia.AnchorInputListenerBehaviour
 182e416670915c50a548c38c642db0d8 Vuforia.UnityExtensions.dll:Vuforia.AnchorStageBehaviour
@@ -377,6 +377,7 @@ bd52750bf9c2990e596a371cb5f1e1f0 Assembly-CSharp.dll:HoloToolkit.Unity.Buttons.B
 97567a1489adfd912d71eb4272820940 Assembly-CSharp.dll:HoloToolkit.Unity.InputModule.Examples.Grabbables.UsableObject
 46ceec08f3966e0fdc2b8db8b9d26b65 Assembly-CSharp.dll:HoloToolkit.Examples.SpatialUnderstandingFeatureOverview.AppState
 573208bea37af5b088bc7e1979ee588a Assembly-CSharp.dll:HoloToolkit.Examples.Prototyping.CycleText
+c30f7278d3a8bfd705622bd53a4abfe4 Assembly-CSharp.dll:.MultiplayerBox
 d20c4db67d216bc1cf61535a06385d45 Assembly-CSharp.dll:.ClickButtonObject
 dfc3ee2f549fa64c3db018efb822b6ef Assembly-CSharp.dll:HoloToolkit.Unity.Tests.UAudioManagerTest
 f895c120a12848b453001b217623c405 Assembly-CSharp.dll:HoloToolkit.Unity.InputModule.InteractionInputSource
@@ -539,7 +540,7 @@ e0f5c53dc1bdd89dd07afcd204fa200c Assembly-CSharp.dll:HoloToolkit.Examples.Intera
 56336c8fbb795a30f2d9c5e1a5701063 Assembly-CSharp.dll:HoloToolkit.Unity.Buttons.CompoundButtonMesh
 0a006f3734181ba8b26758f0866152c0 UnityEngine.SpatialTracking.dll:UnityEngine.SpatialTracking.TrackedPoseDriver
 6226246deacc67187384dd0bcf2ddbc0 Assembly-CSharp.dll:HoloToolkit.Sharing.Utilities.DirectPairing
-04894c6b565d8fcce5c36a56ec7e7d7d Assembly-CSharp.dll:.ObjectPlacer
+d61ea0486b8985509d37d37178579849 Assembly-CSharp.dll:.ObjectPlacer
 f63de675a7247ac274413082538197d4 Assembly-CSharp.dll:HoloToolkit.Examples.Prototyping.CycleShowHideObjects
 9b26695d4d495d20a673c8a00ce464f2 Assembly-CSharp.dll:HoloToolkit.Unity.AudioEventBank
 02aff6ad983e4dac11f5385057aa3473 Assembly-CSharp.dll:HoloToolkit.Unity.InputModule.Examples.Grabbables.GrabbableSnapToOrient
@@ -695,5 +696,5 @@ c1087bf328bbb39eba5a09f26c3b6368 Vuforia.UnityExtensions.dll:Vuforia.MultiTarget
 c8a41ce4eea7677f6dd2aa0e422a2f04 Vuforia.UnityExtensions.dll:Vuforia.VuMarkBehaviour
 c31ff9acb65f7a15b5c6fd77c3314d83 Vuforia.UnityExtensions.dll:Vuforia.WireframeBehaviour
 486cd95c82d8305219c352c06b776e1f Vuforia.UnityExtensions.dll:Vuforia.WireframeTrackableEventHandler
-6fd7a3baf1102c8d306560b0cb3da619 Assembly-CSharp.dll:.MySyncObjectSpawner
-fdb22f67ff33708264abc917eb446a0e Assembly-CSharp.dll:.MyPrefabSpawnManager
+37c130e247f8174db6e3dc8bbf83c7ec Assembly-CSharp.dll:.SpawnMenu
+25a679393cc334936821355e7072c14e Assembly-CSharp.dll:.NetworkHelper

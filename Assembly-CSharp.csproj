@@ -679,13 +679,6 @@
      <Compile Include="Assets\HoloToolkit-Examples\Prototyping\Scripts\SceneSwitcher.cs" />
      <Compile Include="Assets\HoloToolkit-Examples\Prototyping\Scripts\Tests\CycleClicker.cs" />
      <Compile Include="Assets\HoloToolkit-Examples\Prototyping\Scripts\Tests\CycleDots.cs" />
-     <Compile Include="Assets\HoloToolkit-Examples\Sharing\SharingService\Scripts\CustomMessages.cs" />
-     <Compile Include="Assets\HoloToolkit-Examples\Sharing\SharingService\Scripts\ImportExportAnchorManager.cs" />
-     <Compile Include="Assets\HoloToolkit-Examples\Sharing\SharingService\Scripts\RemoteHeadManager.cs" />
-     <Compile Include="Assets\HoloToolkit-Examples\Sharing\SharingService\Scripts\RoomTest.cs" />
-     <Compile Include="Assets\HoloToolkit-Examples\Sharing\SharingService\Scripts\SyncObjectSpawner.cs" />
-     <Compile Include="Assets\HoloToolkit-Examples\Sharing\SharingService\Scripts\SyncSpawnTestSphere.cs" />
-     <Compile Include="Assets\HoloToolkit-Examples\Sharing\SharingService\Scripts\UserNotifications.cs" />
      <Compile Include="Assets\HoloToolkit-Examples\SharingWithUNET\Scripts\BulletController.cs" />
      <Compile Include="Assets\HoloToolkit-Examples\SharingWithUNET\Scripts\GenericNetworkTransmitter.cs" />
      <Compile Include="Assets\HoloToolkit-Examples\SharingWithUNET\Scripts\JoinSelectedSessionButton.cs" />
@@ -698,6 +691,13 @@
      <Compile Include="Assets\HoloToolkit-Examples\SharingWithUNET\Scripts\SessionListButton.cs" />
      <Compile Include="Assets\HoloToolkit-Examples\SharingWithUNET\Scripts\SharedAnchorDebugText.cs" />
      <Compile Include="Assets\HoloToolkit-Examples\SharingWithUNET\Scripts\SharedCollection.cs" />
+     <Compile Include="Assets\HoloToolkit-Examples\SharingWithUNET\Scripts\Sharing\SharingService\Scripts\CustomMessages.cs" />
+     <Compile Include="Assets\HoloToolkit-Examples\SharingWithUNET\Scripts\Sharing\SharingService\Scripts\ImportExportAnchorManager.cs" />
+     <Compile Include="Assets\HoloToolkit-Examples\SharingWithUNET\Scripts\Sharing\SharingService\Scripts\RemoteHeadManager.cs" />
+     <Compile Include="Assets\HoloToolkit-Examples\SharingWithUNET\Scripts\Sharing\SharingService\Scripts\RoomTest.cs" />
+     <Compile Include="Assets\HoloToolkit-Examples\SharingWithUNET\Scripts\Sharing\SharingService\Scripts\SyncObjectSpawner.cs" />
+     <Compile Include="Assets\HoloToolkit-Examples\SharingWithUNET\Scripts\Sharing\SharingService\Scripts\SyncSpawnTestSphere.cs" />
+     <Compile Include="Assets\HoloToolkit-Examples\SharingWithUNET\Scripts\Sharing\SharingService\Scripts\UserNotifications.cs" />
      <Compile Include="Assets\HoloToolkit-Examples\SharingWithUNET\Scripts\StartSessionButton.cs" />
      <Compile Include="Assets\HoloToolkit-Examples\SharingWithUNET\Scripts\UNetAnchorManager.cs" />
      <Compile Include="Assets\HoloToolkit-Examples\SharingWithUNET\Scripts\UNetSharedHologram.cs" />
@@ -787,8 +787,8 @@
      <Compile Include="Assets\Scripts\FusePuzzle.cs" />
      <Compile Include="Assets\Scripts\GameController.cs" />
      <Compile Include="Assets\Scripts\LoadSceneOnClick.cs" />
-     <Compile Include="Assets\Scripts\MyPrefabSpawnManager.cs" />
-     <Compile Include="Assets\Scripts\MySyncObjectSpawner.cs" />
+     <Compile Include="Assets\Scripts\MultiplayerBox.cs" />
+     <Compile Include="Assets\Scripts\NetworkHelper.cs" />
      <Compile Include="Assets\Scripts\ObjectCollectionManager.cs" />
      <Compile Include="Assets\Scripts\ObjectPlacer.cs" />
      <Compile Include="Assets\Scripts\PanelManager.cs" />
@@ -811,6 +811,7 @@
      <Compile Include="Assets\Scripts\SoundController.cs" />
      <Compile Include="Assets\Scripts\SpatialScanManager.cs" />
      <Compile Include="Assets\Scripts\SpatialUnderstandingState.cs" />
+     <Compile Include="Assets\Scripts\SpawnMenu.cs" />
      <Compile Include="Assets\Scripts\Speech.cs" />
      <Compile Include="Assets\Scripts\SwitchPuzzle.cs" />
      <Compile Include="Assets\Scripts\TiltWindow.cs" />

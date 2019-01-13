@@ -1,5 +1,4 @@
-﻿using HoloToolkit.Sharing.SyncModel;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,8 +7,7 @@ public class Box : MonoBehaviour {
     public static Box instance;
     public GameObject[] puzzles;
     public Text number;
-    [SyncData]
-    private SyncString numberText;
+    private string numberText;
 
     void Awake()
     {
@@ -24,6 +22,15 @@ public class Box : MonoBehaviour {
         DontDestroyOnLoad(gameObject);
     }
 
+        // Use this for initialization
+    void Start () {
+		
+	}
+	
+	// Update is called once per frame
+	void Update () {
+		
+	}
 
     public void SpawnNextPuzzle()
     {
@@ -39,7 +46,10 @@ public class Box : MonoBehaviour {
     {
         //public Canvas canvas;
         //irgendeinem Objekt unter der Box die Nummer zuweisen
-        numberText.Value = numberText.Value + num;
-        number.text = numberText.Value;
+        numberText = numberText + num;
+        number.text = numberText;
+        
+  //   int number = Random.Range(0, 10);
+//    return number;
     }
 }
