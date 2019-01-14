@@ -7,9 +7,12 @@ using UnityEngine.Networking;
 
 [NetworkSettings(sendInterval = 0.033f)]
 public class MultiplayerBox : NetworkBehaviour {
+    public static MultiplayerBox _Instance;
     private Transform sharedWorldAnchorTransform;
 
     private bool receivedAuthority;
+
+    public GameObject fusePuzzle;
 
     [SyncVar]
     public NetworkInstanceId nid;
@@ -19,6 +22,15 @@ public class MultiplayerBox : NetworkBehaviour {
 
     [SyncVar]
     private Quaternion localRotation;
+
+    void Awake()
+    {
+        if (_Instance == null)
+            _Instance = this;
+
+        else if (_Instance != this)
+            Destroy(gameObject);
+    }
 
     void Start()
     {
@@ -89,4 +101,24 @@ public class MultiplayerBox : NetworkBehaviour {
         receivedAuthority = false;
     }
 
+    public int GetIndexOfClickedFuse(GameObject obj)
+    {
+        return fusePuzzle.GetComponent<FusePuzzle>().GetIndexOfFuse(obj);
+    }
+
+    [ClientRpc]
+    public void RpcPickUpFuse(int index)
+    {
+        PickUpFuse(index);
+    }
+
+    [Command]
+    public void CmdPickUpFuse(int index)
+    {
+        PickUpFuse(index);
+    }
+
+    void PickUpFuse(int index) {
+        fusePuzzle.GetComponent<FusePuzzle>().PickUpFuse(index);
+    }
 }

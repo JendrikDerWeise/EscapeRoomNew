@@ -10,10 +10,17 @@ public class FusePuzzle : Puzzle{
     public AudioClip shootFuseSound;
     public float fuseSpeed;
     public GameObject fuseOverlay;
+    public List<GameObject> fuseList;
 
-	void Start () {
+    void Start () {
         StartCoroutine(OpenHoles());
         fuseOverlay.SetActive(true);
+
+        fuseList = new List<GameObject>();
+        fuseList.Add(fuses[0]);
+        fuseList.Add(fuses[1]);
+        fuseList.Add(fuses[2]);
+        fuseList.Add(fuses[3]);
     }
 	
     IEnumerator OpenHoles()
@@ -52,4 +59,15 @@ public class FusePuzzle : Puzzle{
         PuzzleSolved();
         fuseOverlay.SetActive(false);
     }
+
+    public void PickUpFuse(int index)
+    {
+        fuseList[index].SetActive(false);
+    }
+
+    public int GetIndexOfFuse(GameObject fuse)
+    {
+        return fuseList.IndexOf(fuse);
+    }
+
 }

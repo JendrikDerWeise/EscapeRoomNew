@@ -372,19 +372,19 @@ namespace HoloToolkit.Unity.SharingWithUNET
             }
         }
 
-        public void PickUpFuse(GameObject obj)
+        public void PickUpFuse(int index)
         {
-            CmdPickUpFuse(obj);
+            CmdPickUpFuse(index);
         }
 
         [Command]
-        void CmdPickUpFuse(GameObject obj)
+        void CmdPickUpFuse(int index)
         {
             GameController gameController = GameController.instance;
             //NetworkIdentity objNetId = gameController.GetComponent<NetworkIdentity>();
             //objNetId.AssignClientAuthority(connectionToClient);
             CmdSetAuth(gameController.netId, GetComponent<NetworkIdentity>());
-            gameController.CmdDisableObject(obj);
+            gameController.CmdDisableObject(index);
             //objNetId.RemoveClientAuthority(connectionToClient);
         }
 

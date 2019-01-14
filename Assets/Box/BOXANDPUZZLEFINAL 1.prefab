@@ -3163,7 +3163,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1649433531397792}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 577.41266, y: 406.91193, z: -1750.2168}
+  m_LocalPosition: {x: 570.6491, y: 406.6676, z: -1751.3535}
   m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
   m_Children:
   - {fileID: 224625258855850288}
@@ -10380,6 +10380,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 749bb5e75c3f4b24e9485258b83d460a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isactive: 0
 --- !u!114 &114210697943492952
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -10612,6 +10613,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ab75657da0db7e4e9e2fee517f57efb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fusePuzzle: {fileID: 1760774157920320}
 --- !u!114 &114397625889336290
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -10865,6 +10867,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 749bb5e75c3f4b24e9485258b83d460a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isactive: 0
 --- !u!114 &114485877832751062
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -10947,6 +10950,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 749bb5e75c3f4b24e9485258b83d460a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isactive: 0
 --- !u!114 &114508862461178922
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -11521,6 +11525,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 749bb5e75c3f4b24e9485258b83d460a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isactive: 0
 --- !u!114 &114851656527564670
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -11714,6 +11719,7 @@ MonoBehaviour:
   greenButton: {fileID: 2100000, guid: 325f9e64bddaa844da7af0812471b764, type: 2}
   redButton: {fileID: 2100000, guid: 288e0c0b474d7f947b3e7fb72de00685, type: 2}
   fuseInv: {fileID: 114465978472963288}
+  fuseList: []
 --- !u!114 &114950452104036658
 MonoBehaviour:
   m_ObjectHideFlags: 1

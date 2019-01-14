@@ -35,6 +35,7 @@ public class GameController : NetworkBehaviour {
     private bool win;
     private SoundController sc;
     private bool pause;
+    private MultiplayerBox multiplayerBox;
     #endregion
 
     KeywordRecognizer keywordRecognizer;
@@ -58,27 +59,18 @@ public class GameController : NetworkBehaviour {
         print("serveronstart");
         MakeSolution();
         currentTime = startingTime;
+        multiplayerBox = MultiplayerBox._Instance;
     }
 
     public override void OnStartClient()
     {
         print("clientonstart");
+        multiplayerBox = MultiplayerBox._Instance;
     }
 
     // Use this for initialization
     void Start () {
-        if (isServer)
-        {
-            //MakeSolution(); SYNCHRONISIEREN!!!!!!!!!!!
-           
-            print("server");
-        }
-
-        if (isLocalPlayer)
-            print("localPlayer");
-
-        if (isClient)
-            print("cvlient");
+        
     }
 
     [ClientRpc]
@@ -308,7 +300,6 @@ public class GameController : NetworkBehaviour {
     [Command]
     public void CmdPutFuseInFusebox()
     {
-        //GameObject.FindGameObjectWithTag("FuseBox").GetComponent<FuseController>().CheckFuseBox();
         RpcPutFuseInFuseBox();
     }
 
@@ -319,24 +310,28 @@ public class GameController : NetworkBehaviour {
     }
 
     [Command]
-    public void CmdDisableObject(GameObject obj)
+    public void CmdDisableObject(int index)
     {
-        NetworkIdentity objNetId = box.GetComponent<NetworkIdentity>();
-        CmdSetAuth(box.GetComponent<NetworkIdentity>().netId, HoloToolkit.Unity.SharingWithUNET.PlayerController._Instance.GetComponent<NetworkIdentity>());
-        //objNetId.AssignClientAuthority(connectionToClient);
-        RpcDisableObject(obj);
-        obj.SetActive(false);
-        //obj.GetComponent<FusePickUpNetwork>().isactive = false;
+        NetworkIdentity objNetId = box.GetComponent<NetworkIdentity>();        
+        if (multiplayerBox == null)
+            multiplayerBox = MultiplayerBox._Instance;
+        multiplayerBox.RpcPickUpFuse(index);
+        multiplayerBox.CmdPickUpFuse(index);
         objNetId.RemoveClientAuthority(connectionToClient);
     }
 
-    [ClientRpc]
-    void RpcDisableObject(GameObject obj)
+    [Command]
+    public void CmdSwitchTheSwitchBox(GameObject obj)
     {
-
-        if (obj != null)
-            obj.SetActive(false);
+        RpcSwitchTheSwitchBox(obj);
     }
+
+    [ClientRpc]
+    void RpcSwitchTheSwitchBox(GameObject obj)
+    {
+        obj.GetComponent<ClickButtonObject_Electric1>().OnMouseDown();
+    }
+
 
     [Command]
     public void CmdSetAuth(NetworkInstanceId objectId, NetworkIdentity player)

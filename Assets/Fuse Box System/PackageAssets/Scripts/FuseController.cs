@@ -2,6 +2,7 @@
 using System.Collections;
 using HoloToolkit.Unity.InputModule;
 using System;
+using System.Collections.Generic;
 
 public class FuseController : MonoBehaviour
 {
@@ -43,8 +44,12 @@ public class FuseController : MonoBehaviour
 
     [SerializeField] private InventoryController_Fuse fuseInv;
 
+    
+
     void Start()
     {
+        
+
         #region Set Light Colour/Fuse Objects, if any fuses booleans are currently set
         if (fuse1Bool)
         {
@@ -74,6 +79,7 @@ public class FuseController : MonoBehaviour
         fuseInv = GameObject.FindWithTag("FuseInventory").GetComponent<InventoryController_Fuse>();
     }
 
+    
     void PoweredUp()
     {
         //DO YOUR DOOR UNLOCKING OR WHATEVER RESULT OF THE FUSE SYSTEM HAVING BEEN COMPLETED!

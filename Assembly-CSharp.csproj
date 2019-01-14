@@ -789,6 +789,7 @@
      <Compile Include="Assets\Scripts\GameController.cs" />
      <Compile Include="Assets\Scripts\LoadSceneOnClick.cs" />
      <Compile Include="Assets\Scripts\MultiplayerBox.cs" />
+     <Compile Include="Assets\Scripts\MultiplayerPanel.cs" />
      <Compile Include="Assets\Scripts\NetworkHelper.cs" />
      <Compile Include="Assets\Scripts\ObjectCollectionManager.cs" />
      <Compile Include="Assets\Scripts\ObjectPlacer.cs" />

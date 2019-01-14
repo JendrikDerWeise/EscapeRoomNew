@@ -41,13 +41,13 @@ public class SpawnMenu : NetworkBehaviour {
 
     public void MoveBox()
     {
-        TakeAuth(spawnedBox);
+        TakeAuthBox(spawnedBox);
         spawnedBox.GetComponent<TapToPlace>().enabled = true;
     }
 
     public void MovePanel()
     {
-        TakeAuth(spawnedPanel);
+        TakeAuthPanel(spawnedPanel);
         spawnedPanel.GetComponent<TapToPlace>().enabled = true;
         networkHelper.CmdStartGame();
         gameObject.SetActive(false);  
@@ -101,10 +101,17 @@ public class SpawnMenu : NetworkBehaviour {
         networkHelper.panel = spawnedPanel;
     }
 
-    private void TakeAuth(GameObject go)
+    private void TakeAuthBox(GameObject go)
     {
         HoloToolkit.Unity.SharingWithUNET.PlayerController player = HoloToolkit.Unity.SharingWithUNET.PlayerController._Instance;
         NetworkIdentity playerID = player.GetComponent<NetworkIdentity>();
         go.GetComponent<MultiplayerBox>().CmdSetAuth(netId, playerID);
+    }
+
+    private void TakeAuthPanel(GameObject go)
+    {
+        HoloToolkit.Unity.SharingWithUNET.PlayerController player = HoloToolkit.Unity.SharingWithUNET.PlayerController._Instance;
+        NetworkIdentity playerID = player.GetComponent<NetworkIdentity>();
+        go.GetComponent<MultiplayerPanel>().CmdSetAuth(netId, playerID);
     }
 }
