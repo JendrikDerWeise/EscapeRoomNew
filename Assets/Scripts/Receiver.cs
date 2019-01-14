@@ -42,7 +42,9 @@ public class Receiver : InteractionReceiver
                 break;
 
             case "Switch":
-                obj.GetComponent<ClickButtonObject_Electric1>().OnMouseDown();
+                //obj.GetComponent<ClickButtonObject_Electric1>().OnMouseDown();
+                int num = obj.GetComponent<ClickButtonObject_Electric1>().clickIndex;
+                player.SwitchingSwitchButton(num);
                 break;
 
             case "ButtonBoard":

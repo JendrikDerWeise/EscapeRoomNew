@@ -36,6 +36,7 @@ public class GameController : NetworkBehaviour {
     private SoundController sc;
     private bool pause;
     private MultiplayerBox multiplayerBox;
+    public int ownGeneratedID;
     #endregion
 
     KeywordRecognizer keywordRecognizer;
@@ -66,6 +67,7 @@ public class GameController : NetworkBehaviour {
     {
         print("clientonstart");
         multiplayerBox = MultiplayerBox._Instance;
+        ownGeneratedID = UnityEngine.Random.Range(0, 10000);
     }
 
     // Use this for initialization
@@ -130,6 +132,7 @@ public class GameController : NetworkBehaviour {
     [Command]
     public void CmdStartOnServer()
     {
+        RpcStart();
         gameStarted = true;
         RpcStartNextPuzzle();
     }
@@ -188,13 +191,31 @@ public class GameController : NetworkBehaviour {
         //TODO GameOver Screen, Optionen zum Neustart
     }
 
-
+    int sendingCounter = 0; //verhindert doppelte Aufrufe
+    int noOfActualPuzzle = 0;
     [Command]
     public void CmdStartNextPuzzle()
     {
+        sendingCounter++;
+        if (sendingCounter == 2)
+        {
+            sendingCounter = 0;
+            return;
+        }
+
+        noOfActualPuzzle++;
         RpcStartNextPuzzle();
-        //box.GetComponentInChildren<Box>().SpawnNextPuzzle();
+
+       /* if(noOfActualPuzzle == 2)
+        {
+            if (multiplayerBox == null)
+                multiplayerBox = MultiplayerBox._Instance;
+
+            RpcSetButtonPowerOnSwitchPuzzle(multiplayerBox.GetComponentInChildren<Electric1>().buttonPower);
+        }*/
     }  
+
+    
 
     [ClientRpc]
     public void RpcStartNextPuzzle()//hiermit starten
@@ -300,42 +321,60 @@ public class GameController : NetworkBehaviour {
     [Command]
     public void CmdPutFuseInFusebox(int senderID)
     {
-        int ownID = connectionToClient.connectionId;
-        bool placeFuseFromInventory = false;
-
-        if (senderID == ownID)
-            placeFuseFromInventory = true;
-
-        RpcPutFuseInFuseBox(placeFuseFromInventory);
+        RpcPutFuseInFuseBox(senderID);
     }
 
     [ClientRpc]
-    void RpcPutFuseInFuseBox(bool placeFuseFromInventory)
+    void RpcPutFuseInFuseBox(int senderID)
     {
+        //string ownID = HoloToolkit.Unity.SharingWithUNET.PlayerController._Instance.connectionToClient.address;
+        bool placeFuseFromInventory = false;
+
+        if (senderID == ownGeneratedID)
+            placeFuseFromInventory = true;
+
+        print("senderID: " + senderID + " ownID: " + ownGeneratedID);
         GameObject.FindGameObjectWithTag("FuseBox").GetComponent<FuseController>().CheckFuseBox(placeFuseFromInventory);
     }
 
     [Command]
     public void CmdDisableObject(int index)
-    {
-        NetworkIdentity objNetId = box.GetComponent<NetworkIdentity>();        
+    { 
         if (multiplayerBox == null)
             multiplayerBox = MultiplayerBox._Instance;
         multiplayerBox.RpcPickUpFuse(index);
         multiplayerBox.CmdPickUpFuse(index);
-        objNetId.RemoveClientAuthority(connectionToClient);
+    }
+
+    public void SetButtonPowerOnSwitchPuzzle(int[] array)
+    {
+        CmdSetButtonPowerOnSwitchPuzzle(array);
     }
 
     [Command]
-    public void CmdSwitchTheSwitchBox(GameObject obj)
+    void CmdSetButtonPowerOnSwitchPuzzle(int[] array)
     {
-        RpcSwitchTheSwitchBox(obj);
+        RpcSetButtonPowerOnSwitchPuzzle(array);
     }
 
     [ClientRpc]
-    void RpcSwitchTheSwitchBox(GameObject obj)
+    void RpcSetButtonPowerOnSwitchPuzzle(int[] array)
     {
-        obj.GetComponent<ClickButtonObject_Electric1>().OnMouseDown();
+        multiplayerBox.GetComponentInChildren<Electric1>().buttonPower = array;
+    }
+
+    [Command]
+    public void CmdSwitchTheSwitchBox(int num)
+    {
+        RpcSwitchTheSwitchBox(num);
+    }
+
+    [ClientRpc]
+    void RpcSwitchTheSwitchBox(int num)
+    {
+        if (multiplayerBox == null)
+            multiplayerBox = MultiplayerBox._Instance;
+        multiplayerBox.GetComponentInChildren<Electric1>().ClickButton(num);
     }
 
 

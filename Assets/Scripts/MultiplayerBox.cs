@@ -13,6 +13,7 @@ public class MultiplayerBox : NetworkBehaviour {
     private bool receivedAuthority;
 
     public GameObject fusePuzzle;
+    public GameObject switchPuzzle;
 
     [SyncVar]
     public NetworkInstanceId nid;

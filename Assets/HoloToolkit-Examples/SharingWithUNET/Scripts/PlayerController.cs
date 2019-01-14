@@ -394,15 +394,30 @@ namespace HoloToolkit.Unity.SharingWithUNET
 
         public void PutFuseIntoFuseBox()
         {
-            CmdPutFuseIntoFuseBox();
+            GameController gameController = GameController.instance;
+            CmdSetAuth(gameController.netId, GetComponent<NetworkIdentity>());
+            CmdPutFuseIntoFuseBox(gameController.ownGeneratedID);
         }
 
         [Command]
-        void CmdPutFuseIntoFuseBox()
+        void CmdPutFuseIntoFuseBox(int ownID)
         {
             GameController gameController = GameController.instance;
             CmdSetAuth(gameController.netId, GetComponent<NetworkIdentity>());
-            gameController.CmdPutFuseInFusebox(connectionToClient.connectionId);
+            gameController.CmdPutFuseInFusebox(ownID);
+        }
+
+        public void SwitchingSwitchButton(int num)
+        {
+            CmdSwitchingSwitchButton(num);
+        }
+
+        [Command]
+        void CmdSwitchingSwitchButton(int num)
+        {
+            GameController gameController = GameController.instance;
+            CmdSetAuth(gameController.netId, GetComponent<NetworkIdentity>());
+            gameController.CmdSwitchTheSwitchBox(num);
         }
     }
 }

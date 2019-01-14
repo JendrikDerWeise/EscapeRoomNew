@@ -33,7 +33,7 @@ public class NetworkHelper : NetworkBehaviour {
         box.GetComponent<BoxCollider>().enabled = false;
         gameController.GetComponent<GameController>().box = box;
         gameController.GetComponent<GameController>().doorlock = panel;
-        gameController.GetComponent<GameController>().RpcStart();
+        //gameController.GetComponent<GameController>().RpcStart();//in 'CMD verlegen
         gameController.GetComponent<GameController>().CmdStartOnServer();
     }
 }

@@ -91,6 +91,8 @@ public class Electric1 : MonoBehaviour
             index++;
             list.Remove(list[r]);
         }
+
+        GameController.instance.SetButtonPowerOnSwitchPuzzle(buttonPower);
     }
 
     public void ClickButton(int index)
