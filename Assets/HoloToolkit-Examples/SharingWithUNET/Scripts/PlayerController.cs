@@ -371,5 +371,42 @@ namespace HoloToolkit.Unity.SharingWithUNET
                 CmdSendSharedTransform(target, pos, rot);
             }
         }
+
+        public void PickUpFuse(GameObject obj)
+        {
+            CmdPickUpFuse(obj);
+        }
+
+        [Command]
+        void CmdPickUpFuse(GameObject obj)
+        {
+            GameController gameController = GameController.instance;
+            //NetworkIdentity objNetId = gameController.GetComponent<NetworkIdentity>();
+            //objNetId.AssignClientAuthority(connectionToClient);
+            CmdSetAuth(gameController.netId, GetComponent<NetworkIdentity>());
+            gameController.CmdDisableObject(obj);
+            //objNetId.RemoveClientAuthority(connectionToClient);
+        }
+
+        [Command]
+        public void CmdSetAuth(NetworkInstanceId objectId, NetworkIdentity player)
+        {
+            var iObject = NetworkServer.FindLocalObject(objectId);
+            var networkIdentity = iObject.GetComponent<NetworkIdentity>();
+            var otherOwner = networkIdentity.clientAuthorityOwner;
+
+            if (otherOwner == player.connectionToClient)
+            {
+                return;
+            }
+            else
+            {
+                if (otherOwner != null)
+                {
+                    networkIdentity.RemoveClientAuthority(otherOwner);
+                }
+                networkIdentity.AssignClientAuthority(player.connectionToClient);
+            }
+        }
     }
 }

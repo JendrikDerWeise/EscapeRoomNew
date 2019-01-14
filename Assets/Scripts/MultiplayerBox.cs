@@ -10,7 +10,6 @@ public class MultiplayerBox : NetworkBehaviour {
     private Transform sharedWorldAnchorTransform;
 
     private bool receivedAuthority;
-    public bool isMoving;
 
     [SyncVar]
     public NetworkInstanceId nid;

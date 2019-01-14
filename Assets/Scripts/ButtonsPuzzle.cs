@@ -13,7 +13,7 @@ public class ButtonsPuzzle : Puzzle {
         buttonPuzzle.onComplete += OnComplete;
         StartCoroutine(OpenButtonPuzzle());
     }
-
+    
     public void OnComplete()
     {
         PuzzleSolved();

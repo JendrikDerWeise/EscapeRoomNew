@@ -15,7 +15,8 @@ public class NetworkHelper : NetworkBehaviour {
     [Command]
     public void CmdStartGame()
     {
-        StartCoroutine("StartingWithWAitingtime");
+       
+       StartCoroutine("StartingWithWAitingtime");
     }
 
     IEnumerator StartingWithWAitingtime()
@@ -32,6 +33,7 @@ public class NetworkHelper : NetworkBehaviour {
         box.GetComponent<BoxCollider>().enabled = false;
         gameController.GetComponent<GameController>().box = box;
         gameController.GetComponent<GameController>().doorlock = panel;
-        gameController.SetActive(true);
+        gameController.GetComponent<GameController>().RpcStart();
+        gameController.GetComponent<GameController>().CmdStartOnServer();
     }
 }

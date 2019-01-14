@@ -13,8 +13,8 @@ public class FusePuzzle : Puzzle{
 
 	void Start () {
         StartCoroutine(OpenHoles());
-        fuseOverlay.SetActive(true);        
-	}
+        fuseOverlay.SetActive(true);
+    }
 	
     IEnumerator OpenHoles()
     {

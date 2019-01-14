@@ -13,7 +13,7 @@ c457dfe3f4d632fcb172cb798b651264 Assembly-CSharp.dll:HoloToolkit.Examples.Intera
 5a4725be46a859349f5d12e7a27001aa Assembly-CSharp.dll:HoloToolkit.Unity.UX.Bezier
 486cd95c82d8305219c352c06b776e1f Assembly-CSharp.dll:.LoadSceneOnClick
 486cd95c82d8305219c352c06b776e1f Assembly-CSharp.dll:HoloToolkit.Unity.FadeScript
-90abd94f7400fe8972e3c5c02c5f8c82 Assembly-CSharp.dll:.GameController
+e9a6be9ea6b8f5a7f26ff0ccc2e88e8a Assembly-CSharp.dll:.GameController
 d223c9aa1cbb1bb44ed5da1e38c39030 Assembly-CSharp.dll:HoloToolkit.Unity.UX.Line
 6acc9f38da3a75c9a7fdaad19d5a3b80 Assembly-CSharp.dll:HoloToolkit.Unity.InputModule.HandDraggable
 70c4bbeb336e5795688c4b4f2fa12ac1 Assembly-CSharp.dll:HoloToolkit.Examples.SpatialUnderstandingFeatureOverview.SpaceVisualizer
@@ -106,6 +106,7 @@ e90403eeda069970e0b9de1533de13a6 UnityEngine.UI.dll:UnityEngine.UI.ToggleGroup
 be10c32eb03fc93d88fb72980ff2b4eb Assembly-CSharp.dll:HoloToolkit.Unity.Billboard
 191c0ab9a1d4cdc0e8ccc2b6f57152ce Assembly-CSharp.dll:HoloToolkit.Examples.InteractiveElements.PositionThemeWidget
 aa9c8fa4dd6a182cf719d8ddfd2fa90b Assembly-CSharp.dll:HoloToolkit.Examples.Prototyping.CycleRotation
+25a679393cc334936821355e7072c14e Assembly-CSharp.dll:.NetworkHelper
 05257c488bbda7cdde9960079dbfccc8 Assembly-CSharp.dll:.ButtonsPuzzle
 486cd95c82d8305219c352c06b776e1f Assembly-CSharp.dll:HoloToolkit.Examples.GazeRuler.ModeTip
 486cd95c82d8305219c352c06b776e1f Assembly-CSharp.dll:.ShapeFinder
@@ -377,7 +378,7 @@ bd52750bf9c2990e596a371cb5f1e1f0 Assembly-CSharp.dll:HoloToolkit.Unity.Buttons.B
 97567a1489adfd912d71eb4272820940 Assembly-CSharp.dll:HoloToolkit.Unity.InputModule.Examples.Grabbables.UsableObject
 46ceec08f3966e0fdc2b8db8b9d26b65 Assembly-CSharp.dll:HoloToolkit.Examples.SpatialUnderstandingFeatureOverview.AppState
 573208bea37af5b088bc7e1979ee588a Assembly-CSharp.dll:HoloToolkit.Examples.Prototyping.CycleText
-c30f7278d3a8bfd705622bd53a4abfe4 Assembly-CSharp.dll:.MultiplayerBox
+243e96ccaa30603aebffe638f7731990 Assembly-CSharp.dll:.MultiplayerBox
 d20c4db67d216bc1cf61535a06385d45 Assembly-CSharp.dll:.ClickButtonObject
 dfc3ee2f549fa64c3db018efb822b6ef Assembly-CSharp.dll:HoloToolkit.Unity.Tests.UAudioManagerTest
 f895c120a12848b453001b217623c405 Assembly-CSharp.dll:HoloToolkit.Unity.InputModule.InteractionInputSource
@@ -393,7 +394,6 @@ f76acea6fd53106899a0e6e70bd43ee9 Assembly-CSharp.dll:.Receiver
 779e97e16660be39d6d758da78e9d02e Assembly-CSharp.dll:HoloToolkit.Unity.InputModule.HandGuidance
 e8069624fa39554fc3053f8419f84c44 Assembly-CSharp.dll:HoloToolkit.Unity.StabilizationPlaneModifier
 486cd95c82d8305219c352c06b776e1f Assembly-CSharp.dll:HoloToolkit.Unity.CalibrationSpace
-09c3f9b462ec79c72dec5a51a386d484 Assembly-CSharp.dll:.Puzzle
 486cd95c82d8305219c352c06b776e1f Assembly-CSharp.dll:.ShowSliderValue
 486cd95c82d8305219c352c06b776e1f Assembly-CSharp.dll:HoloToolkit.Unity.InputModule.Tests.GazeResponder
 486cd95c82d8305219c352c06b776e1f Assembly-CSharp.dll:HoloToolkit.Unity.SharingWithUNET.JoinSelectedSessionButton
@@ -566,6 +566,7 @@ b98143dd5c6af2cf16e7045cd823b95f Assembly-CSharp.dll:HoloToolkit.Unity.InputModu
 dd5a5e717209ba8abe7f5155aceae49b Assembly-CSharp.dll:HoloToolkit.UI.Keyboard.SymbolDisableHighlight
 1e4e76d8963c9d0e4692ea2c648c8e33 Assembly-CSharp.dll:HoloToolkit.Unity.SharingWithUNET.ScrollSessionListButton
 7ef17e982de220e84f9916eed286976a Assembly-CSharp.dll:HoloToolkit.Examples.Prototyping.MoveWithObject
+37c130e247f8174db6e3dc8bbf83c7ec Assembly-CSharp.dll:.SpawnMenu
 717856da73fb8d7eda2cc8a191378194 Assembly-CSharp.dll:HoloToolkit.Unity.InputModule.CustomInputControl
 fd481f877ce62871777fb35398e92eab Assembly-CSharp.dll:HoloToolkit.Examples.UX.DialogExampleLaunchButton
 d9b0a89dbd10217ad9bdf43c1899a0b5 Assembly-CSharp.dll:HoloToolkit.Unity.SharingWithUNET.GenericNetworkTransmitter
@@ -696,5 +697,4 @@ c1087bf328bbb39eba5a09f26c3b6368 Vuforia.UnityExtensions.dll:Vuforia.MultiTarget
 c8a41ce4eea7677f6dd2aa0e422a2f04 Vuforia.UnityExtensions.dll:Vuforia.VuMarkBehaviour
 c31ff9acb65f7a15b5c6fd77c3314d83 Vuforia.UnityExtensions.dll:Vuforia.WireframeBehaviour
 486cd95c82d8305219c352c06b776e1f Vuforia.UnityExtensions.dll:Vuforia.WireframeTrackableEventHandler
-37c130e247f8174db6e3dc8bbf83c7ec Assembly-CSharp.dll:.SpawnMenu
-25a679393cc334936821355e7072c14e Assembly-CSharp.dll:.NetworkHelper
+f92be75cfd51e6af7a0a612bd4674464 Assembly-CSharp.dll:.FusePickUpNetwork

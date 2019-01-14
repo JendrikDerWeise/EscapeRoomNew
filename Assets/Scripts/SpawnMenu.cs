@@ -43,14 +43,12 @@ public class SpawnMenu : NetworkBehaviour {
     {
         TakeAuth(spawnedBox);
         spawnedBox.GetComponent<TapToPlace>().enabled = true;
-        spawnedBox.GetComponent<MultiplayerBox>().isMoving = true;
     }
 
     public void MovePanel()
     {
         TakeAuth(spawnedPanel);
         spawnedPanel.GetComponent<TapToPlace>().enabled = true;
-        spawnedPanel.GetComponent<MultiplayerBox>().isMoving = true;
         networkHelper.CmdStartGame();
         gameObject.SetActive(false);  
     }
@@ -93,12 +91,14 @@ public class SpawnMenu : NetworkBehaviour {
     void RpcSyncBox(GameObject go)
     {
         spawnedBox = go;
+        networkHelper.box = spawnedBox;
     }
 
     [ClientRpc]
     void RpcSyncPanel(GameObject go)
     {
         spawnedPanel = go;
+        networkHelper.panel = spawnedPanel;
     }
 
     private void TakeAuth(GameObject go)

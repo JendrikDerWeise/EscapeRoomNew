@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,7 +11,7 @@ public class SwitchPuzzle : Puzzle {
         switchPuzzle.onComplete += OnComplete;
         switchPuzzle.onFail += OnFail;
         OpenSwitches();
-	}
+    }
     
     private void OpenSwitches()
     {

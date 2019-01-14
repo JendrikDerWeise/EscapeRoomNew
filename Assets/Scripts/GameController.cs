@@ -9,6 +9,8 @@ using UnityEngine.Networking;
 
 public class GameController : NetworkBehaviour {
     public static GameController instance;
+    [SyncVar]
+    public bool gameStarted;
     int round = 0;
     #region GameObjects to control
     [SerializeField] public GameObject doorlock;
@@ -25,9 +27,11 @@ public class GameController : NetworkBehaviour {
     [HideInInspector]
     [SerializeField] private int[] solution;
 
+    [SyncVar]
     private float currentTime = 0f;
     private int tmpSec = 999;
     private bool bStart;
+    [SyncVar]
     private bool win;
     private SoundController sc;
     private bool pause;
@@ -49,67 +53,38 @@ public class GameController : NetworkBehaviour {
         DontDestroyOnLoad(gameObject);
     }
 
+    public override void OnStartServer()
+    {
+        print("serveronstart");
+        MakeSolution();
+        currentTime = startingTime;
+    }
+
+    public override void OnStartClient()
+    {
+        print("clientonstart");
+    }
 
     // Use this for initialization
     void Start () {
-        //if(isServer)
+        if (isServer)
+        {
             //MakeSolution(); SYNCHRONISIEREN!!!!!!!!!!!
+           
+            print("server");
+        }
 
-        MakeSolution();
-        //VoiceOver Ansage 1
-        //SpawnBox();
-        //Warten auf Box
-        //SpawnLock();
-        //Warten auf Lock
-        //VoiceOver Ansage 2
+        if (isLocalPlayer)
+            print("localPlayer");
 
-        //StartPauseTimer();
-        sc = GetComponent<SoundController>();
-        currentTime = startingTime;
-        bStart = win = pause = false;
-
-        keywords.Add("Next", () => {
-            StartNextPuzzle(); //&&solvedPuzzles.Length == 2
-        });
-
-        keywords.Add("Pause", () => {
-            if (!pause)
-            {
-                StartPauseTimer();
-                pause = !pause;
-            }
-        });
-
-        keywords.Add("Anti Pause", () => {
-            if (pause)
-            {
-                StartPauseTimer();
-                pause = !pause;
-            }
-        });
-
-        keywords.Add("Move box", () => {
-            box.GetComponentInParent<TapToPlace>().enabled = true;
-            box.GetComponentInParent<BoxCollider>().enabled = true;
-        });
-
-        keywords.Add("Stop moving box", () => {
-            box.GetComponentInParent<TapToPlace>().enabled = false;
-            box.GetComponentInParent<BoxCollider>().enabled = false;
-        });
-
-        keywordRecognizer = new KeywordRecognizer(keywords.Keys.ToArray());
-        keywordRecognizer.OnPhraseRecognized += KeywordReconizeOnPhraseReconized;
-        keywordRecognizer.Start();
-
-        StartNextPuzzle();
-        StartPauseTimer();
+        if (isClient)
+            print("cvlient");
     }
 
     [ClientRpc]
-    void RpcStart()
+    public void RpcStart()
     {
-        MakeSolution();
+        
         //VoiceOver Ansage 1
         //SpawnBox();
         //Warten auf Box
@@ -119,11 +94,11 @@ public class GameController : NetworkBehaviour {
 
         //StartPauseTimer();
         sc = GetComponent<SoundController>();
-        currentTime = startingTime;
+        //currentTime = startingTime;
         bStart = win = pause = false;
 
         keywords.Add("Next", () => {
-            StartNextPuzzle(); //&&solvedPuzzles.Length == 2
+            CmdStartNextPuzzle(); //&&solvedPuzzles.Length == 2
         });
 
         keywords.Add("Pause", () => {
@@ -156,8 +131,15 @@ public class GameController : NetworkBehaviour {
         keywordRecognizer.OnPhraseRecognized += KeywordReconizeOnPhraseReconized;
         keywordRecognizer.Start();
 
-        StartNextPuzzle();
+        
         StartPauseTimer();
+    }
+
+    [Command]
+    public void CmdStartOnServer()
+    {
+        gameStarted = true;
+        RpcStartNextPuzzle();
     }
 
     void KeywordReconizeOnPhraseReconized(PhraseRecognizedEventArgs args)
@@ -172,16 +154,14 @@ public class GameController : NetworkBehaviour {
 
     // Update is called once per frame
     void Update () {
-   
-        win = CheckWinCondition();
+        if (!gameStarted)
+            return;
+        
+        if(isServer)
+            win = CheckWinCondition();
+
         CheckTimer();
 
-        if (Input.GetMouseButtonDown(0))        //TESTFUNKTION
-        {
-            print("click");
-            StartNextPuzzle(); 
-            sc.PlayClip(sc.failure);
-        }
 	}
 
     private string getTime()
@@ -191,7 +171,7 @@ public class GameController : NetworkBehaviour {
         int sec = (int)((currentTime) % 60);
         if (sec != tmpSec && bStart)
         {
-            doorlock.GetComponent<PinCodeControl>().PlaySecBeep();
+            doorlock.GetComponentInChildren<PinCodeControl>().PlaySecBeep();
             tmpSec = sec;
         }
         if (sec > 9)
@@ -206,7 +186,7 @@ public class GameController : NetworkBehaviour {
 
     public void StartPauseTimer()
     {
-        doorlock.GetComponent<PinCodeControl>().UpdateText(getTime());
+        doorlock.GetComponentInChildren<PinCodeControl>().UpdateText(getTime());
         bStart = !bStart;
         sc.PlayClip(sc.start);
     }
@@ -216,38 +196,59 @@ public class GameController : NetworkBehaviour {
         //TODO GameOver Screen, Optionen zum Neustart
     }
 
-    public void StartNextPuzzle()//hiermit starten
+
+    [Command]
+    public void CmdStartNextPuzzle()
     {
-        if (!CheckWinCondition())
+        RpcStartNextPuzzle();
+        //box.GetComponentInChildren<Box>().SpawnNextPuzzle();
+    }  
+
+    [ClientRpc]
+    public void RpcStartNextPuzzle()//hiermit starten
+    {
+        if (!win)//if (!CheckWinCondition())
         {
             sc.PlayClip(sc.raise);
-            box.GetComponent<Box>().SpawnNextPuzzle();
-            
+            box.GetComponentInChildren<Box>().SpawnNextPuzzle();
+            ShowNumber();
+            /*
             if (round > 0)
             {
-                box.GetComponent<Box>().ShowNextNumber(UnityEngine.Random.Range(0, 10));
+                box.GetComponentInChildren<Box>().ShowNextNumber(UnityEngine.Random.Range(0, 10));
 
             }
-            round++;
+            round++;*/
         }
         else
             sc.PlayClip(sc.win);//WinScreen
     }
 
+    
+
     private void DecreaseTimer()
     {
-        currentTime -= timeToDecrease;
+        CmdDecreaseTimer();
         sc.PlayClip(sc.failure);
+    }
+
+    [Command]
+    void CmdDecreaseTimer()
+    {
+        currentTime -= timeToDecrease;
     }
 
     private void MakeSolution()
     {
-        if (!isServer)
-            return;
-
         solution = new int[solvedPuzzles.Length];
         for(int i = 0; i < solution.Length; i++) 
             solution[i] = UnityEngine.Random.Range(0, 9);
+    }
+
+    [ClientRpc]
+    void RpcSendSolutionToClients(int[] sol)
+    {
+        solution = sol;
     }
 
     private void CheckTimer()
@@ -257,11 +258,11 @@ public class GameController : NetworkBehaviour {
             if (currentTime >= 0)
             {
                 currentTime -= 1 * Time.deltaTime;
-                doorlock.GetComponent<PinCodeControl>().UpdateText(getTime());
+                doorlock.GetComponentInChildren<PinCodeControl>().UpdateText(getTime());
             }
             else
             {
-                doorlock.GetComponent<PinCodeControl>().UpdateText("Game Over");
+                doorlock.GetComponentInChildren<PinCodeControl>().UpdateText("Game Over");
                 GameOver();
                 sc.PlayClip(sc.gameOver);
             }
@@ -274,11 +275,11 @@ public class GameController : NetworkBehaviour {
         {
             if (go.activeSelf)
             {
-                //int nextNumber = Array.FindIndex(solvedPuzzles, x => x.Equals(go));
-                //box.GetComponent<Box>().ShowNextNumber(solution[nextNumber]);
-                box.GetComponent<Box>().ShowNextNumber(UnityEngine.Random.Range(0, 10));
+                int nextNumber = Array.FindIndex(solvedPuzzles, x => x.Equals(go));
+                box.GetComponentInChildren<Box>().ShowNextNumber(solution[nextNumber]);
+                //box.GetComponentInChildren<Box>().ShowNextNumber(UnityEngine.Random.Range(0, 10));
             }
-            box.GetComponent<Box>().ShowNextNumber(UnityEngine.Random.Range(0, 10));
+            //box.GetComponentInChildren<Box>().ShowNextNumber(UnityEngine.Random.Range(0, 10));
         }
     }
 
@@ -296,6 +297,65 @@ public class GameController : NetworkBehaviour {
             if (go.activeSelf)
                 solved++;
 
-        return solved == box.GetComponent<Box>().puzzles.Length;
+        return solved == box.GetComponentInChildren<Box>().puzzles.Length;
+    }
+
+    /// <summary>
+    /// Receiver Callbacks, weil Network IDs bei ChildObjekten nicht funktionieren...
+    /// ...oder ich zu blöd bin...
+    /// </summary>
+
+    [Command]
+    public void CmdPutFuseInFusebox()
+    {
+        //GameObject.FindGameObjectWithTag("FuseBox").GetComponent<FuseController>().CheckFuseBox();
+        RpcPutFuseInFuseBox();
+    }
+
+    [ClientRpc]
+    void RpcPutFuseInFuseBox()
+    {
+        GameObject.FindGameObjectWithTag("FuseBox").GetComponent<FuseController>().CheckFuseBox();
+    }
+
+    [Command]
+    public void CmdDisableObject(GameObject obj)
+    {
+        NetworkIdentity objNetId = box.GetComponent<NetworkIdentity>();
+        CmdSetAuth(box.GetComponent<NetworkIdentity>().netId, HoloToolkit.Unity.SharingWithUNET.PlayerController._Instance.GetComponent<NetworkIdentity>());
+        //objNetId.AssignClientAuthority(connectionToClient);
+        RpcDisableObject(obj);
+        obj.SetActive(false);
+        //obj.GetComponent<FusePickUpNetwork>().isactive = false;
+        objNetId.RemoveClientAuthority(connectionToClient);
+    }
+
+    [ClientRpc]
+    void RpcDisableObject(GameObject obj)
+    {
+
+        if (obj != null)
+            obj.SetActive(false);
+    }
+
+    [Command]
+    public void CmdSetAuth(NetworkInstanceId objectId, NetworkIdentity player)
+    {
+        var iObject = NetworkServer.FindLocalObject(objectId);
+        var networkIdentity = iObject.GetComponent<NetworkIdentity>();
+        var otherOwner = networkIdentity.clientAuthorityOwner;
+
+        if (otherOwner == player.connectionToClient)
+        {
+            return;
+        }
+        else
+        {
+            if (otherOwner != null)
+            {
+                networkIdentity.RemoveClientAuthority(otherOwner);
+            }
+            networkIdentity.AssignClientAuthority(player.connectionToClient);
+        }
     }
 }

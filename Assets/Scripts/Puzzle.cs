@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class Puzzle : MonoBehaviour {
+public abstract class Puzzle : NetworkBehaviour {
     
     public AudioClip openSound;
     public GameObject solved;
@@ -15,6 +16,7 @@ public class Puzzle : MonoBehaviour {
     public void PuzzleSolved()
     {
         solved.SetActive(true);
-        GameController.instance.StartNextPuzzle();
+        GameController.instance.CmdStartNextPuzzle();
     }
+    
 }

@@ -1,9 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 using UnityEngine.UI;
 
-public class Box : MonoBehaviour {
+public class Box : NetworkBehaviour {
     public static Box instance;
     public GameObject[] puzzles;
     public Text number;
@@ -22,15 +23,6 @@ public class Box : MonoBehaviour {
         DontDestroyOnLoad(gameObject);
     }
 
-        // Use this for initialization
-    void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 
     public void SpawnNextPuzzle()
     {
@@ -40,6 +32,12 @@ public class Box : MonoBehaviour {
                 go.SetActive(true);
                 return;
             }
+    }
+
+    [ClientRpc]
+    void RpcActivateNextPuzzle(GameObject go)
+    {
+        go.SetActive(true);
     }
 
     public void ShowNextNumber(int num)
