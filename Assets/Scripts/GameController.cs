@@ -298,15 +298,21 @@ public class GameController : NetworkBehaviour {
     /// </summary>
 
     [Command]
-    public void CmdPutFuseInFusebox()
+    public void CmdPutFuseInFusebox(int senderID)
     {
-        RpcPutFuseInFuseBox();
+        int ownID = connectionToClient.connectionId;
+        bool placeFuseFromInventory = false;
+
+        if (senderID == ownID)
+            placeFuseFromInventory = true;
+
+        RpcPutFuseInFuseBox(placeFuseFromInventory);
     }
 
     [ClientRpc]
-    void RpcPutFuseInFuseBox()
+    void RpcPutFuseInFuseBox(bool placeFuseFromInventory)
     {
-        GameObject.FindGameObjectWithTag("FuseBox").GetComponent<FuseController>().CheckFuseBox();
+        GameObject.FindGameObjectWithTag("FuseBox").GetComponent<FuseController>().CheckFuseBox(placeFuseFromInventory);
     }
 
     [Command]

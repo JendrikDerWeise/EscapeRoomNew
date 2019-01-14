@@ -53,7 +53,7 @@ public class RaycastManager_Fuse : MonoBehaviour
 
                 if (Input.GetMouseButtonDown(0))
                 {
-                    raycasted_obj.GetComponent<FuseController>().CheckFuseBox();
+                    //raycasted_obj.GetComponent<FuseController>().CheckFuseBox();
                 }
             }
         }
@@ -89,7 +89,7 @@ public class RaycastManager_Fuse : MonoBehaviour
 
         if (eventData.selectedObject.gameObject.CompareTag("Fuse"))
         {
-            eventData.selectedObject.gameObject.GetComponent<FuseController>().CheckFuseBox();
+            //eventData.selectedObject.gameObject.GetComponent<FuseController>().CheckFuseBox();
         }
     }
 }

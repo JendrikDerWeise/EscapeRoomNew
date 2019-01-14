@@ -32,7 +32,13 @@ public class Receiver : InteractionReceiver
 
             case "FuseBox":
                 //GameObject.FindGameObjectWithTag("FuseBox").GetComponent<FuseController>().CheckFuseBox();
-                gameController.CmdPutFuseInFusebox();
+                if (fuseInv.inventoryFuses <= 0)
+                {
+                    player.PuzzleFail();
+                    return;
+                }
+
+                player.PutFuseIntoFuseBox();
                 break;
 
             case "Switch":

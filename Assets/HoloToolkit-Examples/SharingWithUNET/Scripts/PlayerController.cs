@@ -329,28 +329,7 @@ namespace HoloToolkit.Unity.SharingWithUNET
             GetComponentInChildren<MeshRenderer>().material.color = Color.blue;
         }
 
-        /// <summary>
-        /// Called on the host when a bullet needs to be added. 
-        /// This will 'spawn' the bullet on all clients, including the 
-        /// client on the host.
-        /// </summary>
-        [Command]
-        void CmdFire()
-        {
-            Vector3 bulletDir = transform.forward;
-            Vector3 bulletPos = transform.position + bulletDir * 1.5f;
-
-            // The bullet needs to be transformed relative to the shared anchor.
-            GameObject nextBullet = (GameObject)Instantiate(bullet, sharedWorldAnchorTransform.InverseTransformPoint(bulletPos), Quaternion.Euler(bulletDir));
-            nextBullet.GetComponentInChildren<Rigidbody>().velocity = bulletDir * 1.0f;
-            NetworkServer.Spawn(nextBullet);
-
-            // Clean up the bullet in 8 seconds.
-            Destroy(nextBullet, 8.0f);
-        }
-
-       
-
+      
         [Command]
         private void CmdSendSharedTransform(GameObject target, Vector3 pos, Quaternion rot)
         {
@@ -372,6 +351,13 @@ namespace HoloToolkit.Unity.SharingWithUNET
             }
         }
 
+        public void PuzzleFail()
+        {
+            GameController gameController = GameController.instance;
+            CmdSetAuth(gameController.netId, GetComponent<NetworkIdentity>());
+            gameController.PuzzleFail();
+        }
+
         public void PickUpFuse(int index)
         {
             CmdPickUpFuse(index);
@@ -381,11 +367,8 @@ namespace HoloToolkit.Unity.SharingWithUNET
         void CmdPickUpFuse(int index)
         {
             GameController gameController = GameController.instance;
-            //NetworkIdentity objNetId = gameController.GetComponent<NetworkIdentity>();
-            //objNetId.AssignClientAuthority(connectionToClient);
             CmdSetAuth(gameController.netId, GetComponent<NetworkIdentity>());
             gameController.CmdDisableObject(index);
-            //objNetId.RemoveClientAuthority(connectionToClient);
         }
 
         [Command]
@@ -407,6 +390,19 @@ namespace HoloToolkit.Unity.SharingWithUNET
                 }
                 networkIdentity.AssignClientAuthority(player.connectionToClient);
             }
+        }
+
+        public void PutFuseIntoFuseBox()
+        {
+            CmdPutFuseIntoFuseBox();
+        }
+
+        [Command]
+        void CmdPutFuseIntoFuseBox()
+        {
+            GameController gameController = GameController.instance;
+            CmdSetAuth(gameController.netId, GetComponent<NetworkIdentity>());
+            gameController.CmdPutFuseInFusebox(connectionToClient.connectionId);
         }
     }
 }

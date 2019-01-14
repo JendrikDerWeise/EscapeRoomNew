@@ -86,23 +86,23 @@ public class FuseController : MonoBehaviour
         fusePuzzle.PowerOn();
     }
 
-    public void CheckFuseBox()
+    public void CheckFuseBox(bool placeFuseFromInventory)
     {
-        #region No Fuses Check
+       /* #region Fuses by networkuser Check
         if (fuseInv.inventoryFuses <= 0 && !powerOn)
         {
             AudioManager_Fuse.instance.Play("ZapSFX");
         }
-        #endregion
+        #endregion*/
 
-        if (fuseInv.inventoryFuses >= 1)
-        {
+        //if (fuseInv.inventoryFuses >= 1)
+        //{
             #region Fuse Check 1
             if (!fuse1Bool)
             {
                 fuseObject1.SetActive(true);
                 light1.GetComponent<Renderer>().material = greenButton;
-                fuseInv.MinusFuseUI();
+                //fuseInv.MinusFuseUI();
                 fuse1Bool = true;
                 AudioManager_Fuse.instance.Play("ZapSFX");
                 FusesEngaged();
@@ -114,7 +114,7 @@ public class FuseController : MonoBehaviour
             {
                 fuseObject2.SetActive(true);
                 light2.GetComponent<Renderer>().material = greenButton;
-                fuseInv.MinusFuseUI();
+                //fuseInv.MinusFuseUI();
                 fuse2Bool = true;
                 AudioManager_Fuse.instance.Play("ZapSFX");
                 FusesEngaged();
@@ -126,7 +126,7 @@ public class FuseController : MonoBehaviour
             {
                 fuseObject3.SetActive(true);
                 light3.GetComponent<Renderer>().material = greenButton;
-                fuseInv.MinusFuseUI();
+                //fuseInv.MinusFuseUI();
                 fuse3Bool = true;
                 AudioManager_Fuse.instance.Play("ZapSFX");
                 FusesEngaged();
@@ -138,13 +138,16 @@ public class FuseController : MonoBehaviour
             {
                 fuseObject4.SetActive(true);
                 light4.GetComponent<Renderer>().material = greenButton;
-                fuseInv.MinusFuseUI();
+                //fuseInv.MinusFuseUI();
                 fuse4Bool = true;
                 AudioManager_Fuse.instance.Play("ZapSFX");
                 FusesEngaged();
             }
             #endregion
-        }
+
+            if(placeFuseFromInventory)
+                fuseInv.MinusFuseUI();
+        //}
     }
 
     void FusesEngaged()
