@@ -407,6 +407,27 @@ namespace HoloToolkit.Unity.SharingWithUNET
             gameController.CmdPutFuseInFusebox(ownID);
         }
 
+        public void SetButtonPowerOnSwitchPuzzle(int[] array)
+        {
+            CmdSetButtonPowerOnSwitchPuzzle(array);
+        }
+
+        int sentArrayOnlyOnce = 0;
+        [Command]
+        void CmdSetButtonPowerOnSwitchPuzzle(int[] array)
+        {
+            if(sentArrayOnlyOnce == 1)
+            {
+                sentArrayOnlyOnce = 0;
+                return;
+            }
+            sentArrayOnlyOnce++;
+            GameController gameController = GameController.instance;
+            CmdSetAuth(gameController.netId, GetComponent<NetworkIdentity>());
+            gameController.RpcSetButtonPowerOnSwitchPuzzle(array);
+        }
+
+
         public void SwitchingSwitchButton(int num)
         {
             CmdSwitchingSwitchButton(num);
@@ -418,6 +439,84 @@ namespace HoloToolkit.Unity.SharingWithUNET
             GameController gameController = GameController.instance;
             CmdSetAuth(gameController.netId, GetComponent<NetworkIdentity>());
             gameController.CmdSwitchTheSwitchBox(num);
+        }
+
+        public void OnWaveBtnDown(int num)
+        {
+            CmdOnWaveBtnDown(num);
+        }
+
+        [Command]
+        void CmdOnWaveBtnDown(int num)
+        {
+            GameController gameController = GameController.instance;
+            CmdSetAuth(gameController.netId, GetComponent<NetworkIdentity>());
+            gameController.CmdOnWaveBtnDown(num);
+        }
+
+        public void OnWaveBtnUp(int num)
+        {
+            CmdOnWaveBtnUp(num);
+        }
+
+        [Command]
+        void CmdOnWaveBtnUp(int num)
+        {
+            GameController gameController = GameController.instance;
+            CmdSetAuth(gameController.netId, GetComponent<NetworkIdentity>());
+            gameController.CmdOnWaveBtnUp(num);
+        }
+
+        public void OnFocusEnter(int num)
+        {
+            CmdOnFocusEnter(num);
+        }
+
+        [Command]
+        void CmdOnFocusEnter(int num)
+        {
+            GameController gameController = GameController.instance;
+            CmdSetAuth(gameController.netId, GetComponent<NetworkIdentity>());
+            gameController.CmdOnFocusEnter(num);
+        }
+
+        public void PushBtnPuzzle(int num)
+        {
+            CmdPushBtnPuzzle(num);
+        }
+
+        [Command]
+        void CmdPushBtnPuzzle(int num)
+        {
+            GameController gameController = GameController.instance;
+            CmdSetAuth(gameController.netId, GetComponent<NetworkIdentity>());
+            gameController.CmdPushBtnPuzzle(num);
+        }
+
+        public void PushResetBtn()
+        {
+            CmdPushResetBtn();
+        }
+
+        [Command]
+        void CmdPushResetBtn()
+        {
+            GameController gameController = GameController.instance;
+            CmdSetAuth(gameController.netId, GetComponent<NetworkIdentity>());
+            gameController.CmdPushResetBtn();  
+        }
+
+        public void SetWaves(float m1_point1, float m1_point2, float m2_point1, float m2_point2)
+        {
+            CmdSetWaves(m1_point1, m1_point2, m2_point1, m2_point2);
+        }
+
+        [Command]
+        void CmdSetWaves(float m1_point1, float m1_point2, float m2_point1, float m2_point2)
+        {
+            GameController gameController = GameController.instance;
+            CmdSetAuth(gameController.netId, GetComponent<NetworkIdentity>());
+            gameController.CmdSetWaves(m1_point1, m1_point2, m2_point1, m2_point2);
         }
     }
 }

@@ -10,11 +10,12 @@ public class ElectricWPuzzle : Puzzle {
 	void Start () {
         electricWavePuzzle.onComplete += OnComplete;
         OpenElectricWaveBox();
+        puzzleID = 4;
     }
 	
     public void OnComplete()
     {
-        PuzzleSolved();
+        PuzzleSolved(puzzleID);
     }
 
     private void OpenElectricWaveBox()

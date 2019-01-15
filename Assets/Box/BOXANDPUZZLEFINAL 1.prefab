@@ -936,6 +936,10 @@ GameObject:
   - component: {fileID: 33308892245687312}
   - component: {fileID: 23635712595720442}
   - component: {fileID: 65319087870951878}
+  - component: {fileID: 114973061187800554}
+  - component: {fileID: 82487930772133924}
+  - component: {fileID: 114750922681116060}
+  - component: {fileID: 114982403510823224}
   m_Layer: 0
   m_Name: paper
   m_TagString: Untagged
@@ -3067,7 +3071,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1649433531397792}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.2734814, y: -10.179201, z: 1.692554}
+  m_LocalPosition: {x: 562.46313, y: 401.86346, z: -1745.9525}
   m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
   m_Children:
   - {fileID: 224625258855850288}
@@ -8690,6 +8694,101 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!82 &82487930772133924
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1373361368416286}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 231c34599220ee1419a8aa8502d311eb, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 0.572
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!82 &82671350063087550
 AudioSource:
   m_ObjectHideFlags: 1
@@ -9323,6 +9422,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   openSound: {fileID: 8300000, guid: dd747be66112de846b314bc2f06beae2, type: 3}
   solved: {fileID: 1211986278579618}
+  puzzleID: 0
   switchPuzzle: {fileID: 114796600268346964}
 --- !u!114 &114048184670792452
 MonoBehaviour:
@@ -9674,6 +9774,7 @@ MonoBehaviour:
   ewp: {fileID: 114415148686841638}
   clickIndex: 2
   tickSound: {fileID: 8300000, guid: 96bb775542ed86d40bdb0fe0a0c560e5, type: 3}
+  interpolationPeriod: 0.1
 --- !u!114 &114263761083893912
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -9764,6 +9865,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   openSound: {fileID: 8300000, guid: 0c7e19fe533789a4d84157467cb4ea93, type: 3}
   solved: {fileID: 1996711445293810}
+  puzzleID: 0
   electricWavePuzzle: {fileID: 114415148686841638}
 --- !u!114 &114329986841845794
 MonoBehaviour:
@@ -9841,6 +9943,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fusePuzzle: {fileID: 1760774157920320}
   switchPuzzle: {fileID: 1632251595220608}
+  wavePuzzle: {fileID: 1781493603155240}
 --- !u!114 &114397625889336290
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -9926,7 +10029,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   monitor1: {fileID: 2100000, guid: dfc59230fc03e8e4aac41375c006e519, type: 2}
   monitor2: {fileID: 2100000, guid: c8b501c7d594f2b48855906bd4f2caac, type: 2}
+  btns:
+  - {fileID: 1938219397102602}
+  - {fileID: 1879974798567860}
   gamePause: 0
+  m1_point1: 0
+  m1_point2: 0
+  m2_point1: 0
+  m2_point2: 0
 --- !u!114 &114429305829835774
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -9940,6 +10050,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   openSound: {fileID: 8300000, guid: a83a8d4b05529894da28359fd5645423, type: 3}
   solved: {fileID: 1645393130024260}
+  puzzleID: 0
   buttonPuzzle: {fileID: 114610127609973708}
 --- !u!114 &114434441175150278
 MonoBehaviour:
@@ -9970,6 +10081,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   openSound: {fileID: 8300000, guid: a83a8d4b05529894da28359fd5645423, type: 3}
   solved: {fileID: 1641479204279824}
+  puzzleID: 0
   fuses:
   - {fileID: 1584187187895926}
   - {fileID: 1063402080394312}
@@ -10445,6 +10557,7 @@ MonoBehaviour:
   ewp: {fileID: 114415148686841638}
   clickIndex: 1
   tickSound: {fileID: 8300000, guid: 96bb775542ed86d40bdb0fe0a0c560e5, type: 3}
+  interpolationPeriod: 0.1
 --- !u!114 &114673665553926868
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -10599,6 +10712,32 @@ MonoBehaviour:
     i15: 127
   m_ServerOnly: 0
   m_LocalPlayerAuthority: 0
+--- !u!114 &114750922681116060
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1373361368416286}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4768146f072b50149a922df192dfb58f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flattenedAxis: 0
+  scaleHandleMaterial: {fileID: 2100000, guid: 4a9072a0d8623aa44abf31f02d209a09, type: 2}
+  rotateHandleMaterial: {fileID: 2100000, guid: 4a9072a0d8623aa44abf31f02d209a09,
+    type: 2}
+  interactingMaterial: {fileID: 2100000, guid: b614a09bc429623478e946d8170b15ae, type: 2}
+  scaleRate: 1
+  appBarHoverOffsetZ: 0.05
+  maxScale: 2
+  rotationType: 0
+  handMotionToRotate: 0
+  rotateAroundPivot: 0
+  boundingBoxPrefab: {fileID: 114030465538688920, guid: 865a8ded6c47efd4285f04f3aebe99e9,
+    type: 2}
+  appBarPrefab: {fileID: 114050950401502068, guid: aa610ada334bff640a535f0d23a9a15c,
+    type: 2}
 --- !u!114 &114759722985411774
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -11049,7 +11188,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   openSound: {fileID: 8300000, guid: a83a8d4b05529894da28359fd5645423, type: 3}
   solved: {fileID: 1823608940546586}
-  paperToPrint: {fileID: 1352744664640104}
+  puzzleID: 0
+  paperToPrint: {fileID: 1373361368416286}
 --- !u!114 &114961012181696190
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -11076,6 +11216,36 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   clickIndex: 13
   buttonPuzzle: {fileID: 114610127609973708}
+--- !u!114 &114973061187800554
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1373361368416286}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 990fbf29f76b81643b4841a1e8a53500, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 2
+  endPos: {fileID: 1155102467318532}
+--- !u!114 &114982403510823224
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1373361368416286}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d5a0a60fbe897549ad0bfe2039f12b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HostTransform: {fileID: 0}
+  DistanceScale: 2
+  RotationMode: 0
+  PositionLerpSpeed: 0.2
+  RotationLerpSpeed: 0.2
+  IsDraggingEnabled: 1
 --- !u!114 &114988569358744792
 MonoBehaviour:
   m_ObjectHideFlags: 1

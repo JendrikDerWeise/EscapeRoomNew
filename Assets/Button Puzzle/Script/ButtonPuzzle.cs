@@ -53,7 +53,7 @@ public class ButtonPuzzle : MonoBehaviour
 
             boardArray[y][x] = 1;
             changeMaterial(i, 1);
-            canReset = false;
+            canReset = true;
             resetButton.material = material2;
         }
 

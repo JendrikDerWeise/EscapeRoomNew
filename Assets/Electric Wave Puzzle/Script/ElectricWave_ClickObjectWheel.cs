@@ -21,6 +21,10 @@ public class ElectricWave_ClickObjectWheel : MonoBehaviour
 
     private bool inputDown;
 
+    private float time = 0.0f;
+    public float interpolationPeriod = 0.1f;
+
+
     private void Start()
     {
         audioSource = GetComponent<AudioSource>();
@@ -34,23 +38,18 @@ public class ElectricWave_ClickObjectWheel : MonoBehaviour
     public void OnMouseDown()
     {
         inputDown = true;
-        /*if (!ewp.gamePause)
-        {
-            Vector3 pos = cam.WorldToScreenPoint(transform.position);
-            pos = Input.mousePosition - pos;
-            dragAngle = Mathf.Atan2(pos.y, pos.x) * Mathf.Rad2Deg;
-            
-            rotation++;
-            currentRotation = saveRotation;
-            OnMouseDrag();
-        }*/
     }
     
 
     void Update()
     {
-        if (inputDown)
-            MoveWave();
+        time += Time.deltaTime;
+        if (time >= interpolationPeriod)
+        {
+            time = time - interpolationPeriod;
+            if (inputDown)
+                MoveWave();
+        }
     }
 
     public void MoveWave()//OnMouseDrag()

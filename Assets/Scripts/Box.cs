@@ -24,29 +24,23 @@ public class Box : NetworkBehaviour {
     }
 
 
-    public void SpawnNextPuzzle()
+    public void SpawnNextPuzzle(int puzzleID)
     {
-        foreach (GameObject go in puzzles)
-            if (!go.activeSelf)
-            {
-                go.SetActive(true);
-                return;
-            }
+        if(puzzleID == puzzles.Length)
+            return;
+        
+        puzzles[puzzleID].SetActive(true);
+            
     }
 
-    [ClientRpc]
-    void RpcActivateNextPuzzle(GameObject go)
-    {
-        go.SetActive(true);
-    }
-
-    public void ShowNextNumber(int num)
+    public void ShowNextNumber(string num)
     {
         //public Canvas canvas;
         //irgendeinem Objekt unter der Box die Nummer zuweisen
-        numberText = numberText + num;
+        numberText = num; //numberText + num;
         number.text = numberText;
-        
+
+        print("shownextnumber");
   //   int number = Random.Range(0, 10);
 //    return number;
     }

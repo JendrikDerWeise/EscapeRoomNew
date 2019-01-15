@@ -1801,8 +1801,9 @@ MonoBehaviour:
   box: {fileID: 0}
   solvedPuzzles: []
   startingTime: 900
-  timeToDecrease: 0
+  timeToDecrease: 60
   solution: 
+  ownGeneratedID: 0
 --- !u!4 &1020214876
 Transform:
   m_ObjectHideFlags: 0

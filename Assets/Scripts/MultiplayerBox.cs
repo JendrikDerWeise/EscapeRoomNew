@@ -14,6 +14,7 @@ public class MultiplayerBox : NetworkBehaviour {
 
     public GameObject fusePuzzle;
     public GameObject switchPuzzle;
+    public GameObject wavePuzzle;
 
     [SyncVar]
     public NetworkInstanceId nid;

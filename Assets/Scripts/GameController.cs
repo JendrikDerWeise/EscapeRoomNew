@@ -15,7 +15,7 @@ public class GameController : NetworkBehaviour {
     #region GameObjects to control
     [SerializeField] public GameObject doorlock;
     [SerializeField] public GameObject box;
-    [SerializeField] public GameObject[] solvedPuzzles;
+    [SerializeField] public GameObject[] solvedPuzzles = new GameObject[0];
     #endregion
 
     #region Time configuration
@@ -78,21 +78,13 @@ public class GameController : NetworkBehaviour {
     [ClientRpc]
     public void RpcStart()
     {
-        
-        //VoiceOver Ansage 1
-        //SpawnBox();
-        //Warten auf Box
-        //SpawnLock();
-        //Warten auf Lock
-        //VoiceOver Ansage 2
-
-        //StartPauseTimer();
         sc = GetComponent<SoundController>();
         //currentTime = startingTime;
         bStart = win = pause = false;
 
         keywords.Add("Next", () => {
-            CmdStartNextPuzzle(); //&&solvedPuzzles.Length == 2
+            CmdStartNextPuzzle(3); //PaperPuzzle
+            print("Er hatr next gesagt!");
         });
 
         keywords.Add("Pause", () => {
@@ -134,7 +126,7 @@ public class GameController : NetworkBehaviour {
     {
         RpcStart();
         gameStarted = true;
-        RpcStartNextPuzzle();
+        RpcStartNextPuzzle(0);
     }
 
     void KeywordReconizeOnPhraseReconized(PhraseRecognizedEventArgs args)
@@ -156,8 +148,8 @@ public class GameController : NetworkBehaviour {
             win = CheckWinCondition();
 
         CheckTimer();
-
-	}
+        
+    }
 
     private string getTime()
     {
@@ -191,40 +183,20 @@ public class GameController : NetworkBehaviour {
         //TODO GameOver Screen, Optionen zum Neustart
     }
 
-    int sendingCounter = 0; //verhindert doppelte Aufrufe
-    int noOfActualPuzzle = 0;
     [Command]
-    public void CmdStartNextPuzzle()
+    public void CmdStartNextPuzzle(int puzzleID)
     {
-        sendingCounter++;
-        if (sendingCounter == 2)
-        {
-            sendingCounter = 0;
-            return;
-        }
-
-        noOfActualPuzzle++;
-        RpcStartNextPuzzle();
-
-       /* if(noOfActualPuzzle == 2)
-        {
-            if (multiplayerBox == null)
-                multiplayerBox = MultiplayerBox._Instance;
-
-            RpcSetButtonPowerOnSwitchPuzzle(multiplayerBox.GetComponentInChildren<Electric1>().buttonPower);
-        }*/
-    }  
-
-    
+        RpcStartNextPuzzle(puzzleID);
+    }    
 
     [ClientRpc]
-    public void RpcStartNextPuzzle()//hiermit starten
+    public void RpcStartNextPuzzle(int puzzleID)//hiermit starten
     {
         if (!win)//if (!CheckWinCondition())
         {
             sc.PlayClip(sc.raise);
-            box.GetComponentInChildren<Box>().SpawnNextPuzzle();
-            ShowNumber();
+            box.GetComponentInChildren<Box>().SpawnNextPuzzle(puzzleID);
+            ShowNumber(puzzleID);
             /*
             if (round > 0)
             {
@@ -253,15 +225,22 @@ public class GameController : NetworkBehaviour {
 
     private void MakeSolution()
     {
-        solution = new int[solvedPuzzles.Length];
-        for(int i = 0; i < solution.Length; i++) 
+        string solutionString = "";
+        solution = new int[5];
+        for (int i = 0; i < solution.Length; i++)
+        {
             solution[i] = UnityEngine.Random.Range(0, 9);
+            solutionString += solution[i];
+        }
+        
+        RpcSendSolutionToClients(solution, solutionString);
     }
 
     [ClientRpc]
-    void RpcSendSolutionToClients(int[] sol)
+    void RpcSendSolutionToClients(int[] sol, string solutionString)
     {
         solution = sol;
+        doorlock.GetComponentInChildren<PinCodeControl>().SetCode(solutionString);
     }
 
     private void CheckTimer()
@@ -282,9 +261,19 @@ public class GameController : NetworkBehaviour {
         }
     }
 
-    private void ShowNumber()
+    private void ShowNumber(int nextNumber)
     {
-        foreach(GameObject go in solvedPuzzles)
+        if (nextNumber == 0)
+            return;
+
+        string visibleCode = "";
+
+        for (int i = 0; i < nextNumber; i++)
+            visibleCode += "" + solution[i];
+
+        box.GetComponentInChildren<Box>().ShowNextNumber(visibleCode);
+        /*
+        foreach (GameObject go in solvedPuzzles)
         {
             if (go.activeSelf)
             {
@@ -293,12 +282,11 @@ public class GameController : NetworkBehaviour {
                 //box.GetComponentInChildren<Box>().ShowNextNumber(UnityEngine.Random.Range(0, 10));
             }
             //box.GetComponentInChildren<Box>().ShowNextNumber(UnityEngine.Random.Range(0, 10));
-        }
+        }*/
     }
 
     public void PuzzleFail()
     {
-        //Optisch verdeutlichen?
         sc.PlayClip(sc.failure);
         DecreaseTimer();
     }
@@ -327,7 +315,6 @@ public class GameController : NetworkBehaviour {
     [ClientRpc]
     void RpcPutFuseInFuseBox(int senderID)
     {
-        //string ownID = HoloToolkit.Unity.SharingWithUNET.PlayerController._Instance.connectionToClient.address;
         bool placeFuseFromInventory = false;
 
         if (senderID == ownGeneratedID)
@@ -345,22 +332,12 @@ public class GameController : NetworkBehaviour {
         multiplayerBox.RpcPickUpFuse(index);
         multiplayerBox.CmdPickUpFuse(index);
     }
-
-    public void SetButtonPowerOnSwitchPuzzle(int[] array)
-    {
-        CmdSetButtonPowerOnSwitchPuzzle(array);
-    }
-
-    [Command]
-    void CmdSetButtonPowerOnSwitchPuzzle(int[] array)
-    {
-        RpcSetButtonPowerOnSwitchPuzzle(array);
-    }
-
+    
     [ClientRpc]
-    void RpcSetButtonPowerOnSwitchPuzzle(int[] array)
+    public void RpcSetButtonPowerOnSwitchPuzzle(int[] array)
     {
-        multiplayerBox.GetComponentInChildren<Electric1>().buttonPower = array;
+        Electric1 sp = multiplayerBox.switchPuzzle.GetComponent<SwitchPuzzle>().switchPuzzle;
+        sp.buttonPower = array;
     }
 
     [Command]
@@ -377,25 +354,90 @@ public class GameController : NetworkBehaviour {
         multiplayerBox.GetComponentInChildren<Electric1>().ClickButton(num);
     }
 
+    [Command]
+    public void CmdOnWaveBtnDown(int num)
+    {
+        RpcOnWaveBtnDown(num);
+    }
+
+    [ClientRpc]
+    void RpcOnWaveBtnDown(int num)
+    {
+        if (multiplayerBox == null)
+            multiplayerBox = MultiplayerBox._Instance;
+        multiplayerBox.GetComponentInChildren<ElectricWavePuzzle>().btns[num - 1].GetComponent<ElectricWave_ClickObjectWheel>().OnMouseDown();
+    }
 
     [Command]
-    public void CmdSetAuth(NetworkInstanceId objectId, NetworkIdentity player)
+    public void CmdOnWaveBtnUp(int num)
     {
-        var iObject = NetworkServer.FindLocalObject(objectId);
-        var networkIdentity = iObject.GetComponent<NetworkIdentity>();
-        var otherOwner = networkIdentity.clientAuthorityOwner;
+        RpcOnWaveBtnUp(num);
+    }
 
-        if (otherOwner == player.connectionToClient)
-        {
-            return;
-        }
-        else
-        {
-            if (otherOwner != null)
-            {
-                networkIdentity.RemoveClientAuthority(otherOwner);
-            }
-            networkIdentity.AssignClientAuthority(player.connectionToClient);
-        }
+    [ClientRpc]
+    void RpcOnWaveBtnUp(int num)
+    {
+        if (multiplayerBox == null)
+            multiplayerBox = MultiplayerBox._Instance;
+        multiplayerBox.GetComponentInChildren<ElectricWavePuzzle>().btns[num - 1].GetComponent<ElectricWave_ClickObjectWheel>().OnMouseUp();
+    }
+
+    [Command]
+    public void CmdOnFocusEnter(int num)
+    {
+        RpcOnFocusEnter(num);
+    }
+
+    [ClientRpc]
+    void RpcOnFocusEnter(int num)
+    {
+        if (multiplayerBox == null)
+            multiplayerBox = MultiplayerBox._Instance;
+        multiplayerBox.GetComponentInChildren<ElectricWavePuzzle>().btns[num - 1].GetComponent<ElectricWave_ClickObjectWheel>().OnFocusEnter();
+    }
+
+    [Command]
+    public void CmdPushBtnPuzzle(int num)
+    {
+        RpcPushBtnPuzzle(num);
+    }
+
+    [ClientRpc]
+    void RpcPushBtnPuzzle(int num)
+    {
+        if (multiplayerBox == null)
+            multiplayerBox = MultiplayerBox._Instance;
+        multiplayerBox.GetComponentInChildren<ButtonPuzzle>().ClickButton(num);
+    }
+
+    [Command]
+    public void CmdPushResetBtn()
+    {
+        RpcPushResetBtn();
+    }
+
+    [ClientRpc]
+    void RpcPushResetBtn()
+    {
+        if (multiplayerBox == null)
+            multiplayerBox = MultiplayerBox._Instance;
+        multiplayerBox.GetComponentInChildren<ButtonPuzzle>().Setup();
+        PuzzleFail();
+    }
+
+    [Command]
+    public void CmdSetWaves(float m1_point1, float m1_point2, float m2_point1, float m2_point2)
+    {
+        RpcSetWaves(m1_point1, m1_point2, m2_point1, m2_point2);
+    }
+
+    [ClientRpc]
+    void RpcSetWaves(float m1_point1, float m1_point2, float m2_point1, float m2_point2)
+    {
+        ElectricWavePuzzle wp = multiplayerBox.wavePuzzle.GetComponent<ElectricWavePuzzle>();
+        wp.m1_point1 = m1_point1;
+        wp.m1_point2 = m1_point2;
+        wp.m2_point1 = m2_point1;
+        wp.m2_point2 = m2_point2;
     }
 }

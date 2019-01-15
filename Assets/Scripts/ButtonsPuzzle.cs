@@ -12,11 +12,12 @@ public class ButtonsPuzzle : Puzzle {
     void Start () {
         buttonPuzzle.onComplete += OnComplete;
         StartCoroutine(OpenButtonPuzzle());
+        puzzleID = 5;
     }
     
     public void OnComplete()
     {
-        PuzzleSolved();
+        PuzzleSolved(puzzleID);
     }
 
     IEnumerator OpenButtonPuzzle()

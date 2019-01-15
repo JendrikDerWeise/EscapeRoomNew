@@ -8,12 +8,13 @@ public class PaperPuzzle : Puzzle {
 
     private void Start()
     {
+        puzzleID = 3;
         StartCoroutine(OpenPrinter());
     }
 
     private void OnSayKeyword()
     {
-        PuzzleSolved();
+        PuzzleSolved(puzzleID);
     }
 
     IEnumerator OpenPrinter()

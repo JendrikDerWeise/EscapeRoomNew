@@ -15,6 +15,7 @@ public class FusePuzzle : Puzzle{
     void Start () {
         StartCoroutine(OpenHoles());
         fuseOverlay.SetActive(true);
+        puzzleID = 1;
 
         fuseList = new List<GameObject>();
         fuseList.Add(fuses[0]);
@@ -56,7 +57,7 @@ public class FusePuzzle : Puzzle{
 
     public void PowerOn()
     {
-        PuzzleSolved();
+        PuzzleSolved(puzzleID);
         fuseOverlay.SetActive(false);
     }
 

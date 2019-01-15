@@ -48,15 +48,20 @@ public class Receiver : InteractionReceiver
                 break;
 
             case "ButtonBoard":
-                obj.GetComponent<ClickButtonObject>().OnMouseDown();
+                //obj.GetComponent<ClickButtonObject>().OnMouseDown();
+                int numBtn = obj.GetComponent<ClickButtonObject>().clickIndex;
+                player.PushBtnPuzzle(numBtn);
                 break;
 
             case "ButtonBoardReset":
-                obj.GetComponent<ResetButton>().OnMouseDown();
+                //obj.GetComponent<ResetButton>().OnMouseDown();
+                player.PushResetBtn();
                 break;
 
             case "ElectricWave":
-                obj.GetComponent<ElectricWave_ClickObjectWheel>().OnMouseDown();
+                //obj.GetComponent<ElectricWave_ClickObjectWheel>().OnMouseDown();
+                int waveBtn = GetClickIndexFromWaveBtn(obj);
+                player.OnWaveBtnDown(waveBtn);
                 break;
 
 
@@ -70,7 +75,9 @@ public class Receiver : InteractionReceiver
         switch (obj.tag)
         {
             case "ElectricWave":
-                obj.GetComponent<ElectricWave_ClickObjectWheel>().OnMouseUp();
+                //obj.GetComponent<ElectricWave_ClickObjectWheel>().OnMouseUp();
+                int waveBtn = GetClickIndexFromWaveBtn(obj);
+                player.OnWaveBtnUp(waveBtn);
                 break;
 
             default:
@@ -83,11 +90,18 @@ public class Receiver : InteractionReceiver
         switch (obj.tag)
         {
             case "ElectricWave":
-                obj.GetComponent<ElectricWave_ClickObjectWheel>().OnFocusEnter();
+                //obj.GetComponent<ElectricWave_ClickObjectWheel>().OnFocusEnter();
+                int waveBtn = GetClickIndexFromWaveBtn(obj);
+                player.OnFocusEnter(waveBtn);
                 break;
 
             default:
                 break;
         }
+    }
+
+    int GetClickIndexFromWaveBtn(GameObject obj)
+    {
+        return obj.GetComponent<ElectricWave_ClickObjectWheel>().clickIndex;
     }
 }

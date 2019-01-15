@@ -92,7 +92,7 @@ public class Electric1 : MonoBehaviour
             list.Remove(list[r]);
         }
 
-        GameController.instance.SetButtonPowerOnSwitchPuzzle(buttonPower);
+        HoloToolkit.Unity.SharingWithUNET.PlayerController._Instance.SetButtonPowerOnSwitchPuzzle(buttonPower);
     }
 
     public void ClickButton(int index)

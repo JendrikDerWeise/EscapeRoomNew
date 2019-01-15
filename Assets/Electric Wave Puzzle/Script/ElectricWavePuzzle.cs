@@ -10,13 +10,15 @@ public class ElectricWavePuzzle : MonoBehaviour
     public Material monitor1;
     public Material monitor2;
 
+    public GameObject[] btns;
+
     public bool gamePause = false;
 
     private AudioSource audioSource;
-    private float m1_point1 = 0;
-    private float m1_point2 = 0;
-    private float m2_point1 = 0;
-    private float m2_point2 = 0;
+    public float m1_point1 = 0;
+    public float m1_point2 = 0;
+    public float m2_point1 = 0;
+    public float m2_point2 = 0;
     private bool complete1 = false;
     private bool complete2 = false;
 
@@ -42,6 +44,8 @@ public class ElectricWavePuzzle : MonoBehaviour
         m2_point2 = Mathf.Round(m2_point2 * 100f) / 100f;
 
         CheckComplete();
+
+        HoloToolkit.Unity.SharingWithUNET.PlayerController._Instance.SetWaves(m1_point1, m1_point2, m2_point1, m2_point2);
     }
 	
 	void Update ()

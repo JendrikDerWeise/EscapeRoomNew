@@ -11,6 +11,7 @@ public class SwitchPuzzle : Puzzle {
         switchPuzzle.onComplete += OnComplete;
         switchPuzzle.onFail += OnFail;
         OpenSwitches();
+        puzzleID = 2;
     }
     
     private void OpenSwitches()
@@ -22,7 +23,7 @@ public class SwitchPuzzle : Puzzle {
 
     private void OnComplete()
     {
-        PuzzleSolved();
+        PuzzleSolved(puzzleID);
     }
 
     private void OnFail()
