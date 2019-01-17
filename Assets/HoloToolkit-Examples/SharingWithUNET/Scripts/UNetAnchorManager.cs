@@ -515,6 +515,11 @@ namespace HoloToolkit.Unity.SharingWithUNET
             gotOne = true;
         }
 
+        void SendClientReady()
+        {
+            NetworkHelper._Instance.CmdSendClientReady();
+        }
+
         /// <summary>
         /// Called when a remote anchor has been deserialized
         /// </summary>
@@ -540,6 +545,7 @@ namespace HoloToolkit.Unity.SharingWithUNET
                 Anchor_OnTrackingChanged(anchor, anchor.isLocated);
 
                 ImportInProgress = false;
+                SendClientReady();
             }
             else
             {

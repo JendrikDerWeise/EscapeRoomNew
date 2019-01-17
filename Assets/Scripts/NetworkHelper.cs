@@ -66,7 +66,7 @@ public class NetworkHelper : NetworkBehaviour {
         anchorsEstablished = value;
         print("anchors established nwhelper: " + anchorsEstablished);
 
-        if(anchorsEstablished >= 2)
+        if(anchorsEstablished == 1)
         {
             if (isServer)
                 spawnMenu.SetActive(true);

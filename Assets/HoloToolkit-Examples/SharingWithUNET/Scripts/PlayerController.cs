@@ -105,7 +105,7 @@ namespace HoloToolkit.Unity.SharingWithUNET
         {
             Debug.LogFormat("AnchorEstablished for {0} was {1} is now {2}", PlayerName, AnchorEstablished, update);
             AnchorEstablished = update;
-            SendClientReady();
+            //SendClientReady();
             // only draw the mesh for the player if the anchor is found.
             GetComponentInChildren<MeshRenderer>().enabled = update;
         }

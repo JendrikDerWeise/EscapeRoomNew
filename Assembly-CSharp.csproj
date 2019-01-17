@@ -793,6 +793,7 @@
      <Compile Include="Assets\Scripts\NetworkHelper.cs" />
      <Compile Include="Assets\Scripts\ObjectCollectionManager.cs" />
      <Compile Include="Assets\Scripts\ObjectPlacer.cs" />
+     <Compile Include="Assets\Scripts\OnSinglePlayerClicked.cs" />
      <Compile Include="Assets\Scripts\PanelManager.cs" />
      <Compile Include="Assets\Scripts\Paper.cs" />
      <Compile Include="Assets\Scripts\PaperPuzzle.cs" />
