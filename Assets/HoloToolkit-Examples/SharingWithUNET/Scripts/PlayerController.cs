@@ -14,6 +14,8 @@ namespace HoloToolkit.Unity.SharingWithUNET
     public class PlayerController : NetworkBehaviour
     {
         private GameObject spawnMenu;
+        private GameObject waitingThing;
+        private bool clientReady;
         private bool spawnMenuIsSet;
         public static PlayerController _Instance = null;
         /// <summary>
@@ -103,6 +105,7 @@ namespace HoloToolkit.Unity.SharingWithUNET
         {
             Debug.LogFormat("AnchorEstablished for {0} was {1} is now {2}", PlayerName, AnchorEstablished, update);
             AnchorEstablished = update;
+            SendClientReady();
             // only draw the mesh for the player if the anchor is found.
             GetComponentInChildren<MeshRenderer>().enabled = update;
         }
@@ -201,6 +204,7 @@ namespace HoloToolkit.Unity.SharingWithUNET
         {
             networkDiscovery = NetworkDiscoveryWithAnchors.Instance;
             anchorManager = UNetAnchorManager.Instance;
+            
         }
 
         private void Start()
@@ -231,11 +235,12 @@ namespace HoloToolkit.Unity.SharingWithUNET
             transform.SetParent(sharedWorldAnchorTransform);
 
             
-            
+
         }
 
         private void Update()
         {
+
             // If we aren't the local player, we just need to make sure that the position of this object is set properly
             // so that we properly render their avatar in our world.
             if (!isLocalPlayer && string.IsNullOrEmpty(PlayerName) == false)
@@ -271,21 +276,11 @@ namespace HoloToolkit.Unity.SharingWithUNET
             // and rotation
             CmdTransform(transform.localPosition, transform.localRotation);
 
-            if(spawnMenu == null)
-                spawnMenu = GameObject.FindGameObjectWithTag("anchorflag");
-
-            if (spawnMenu != null && !spawnMenuIsSet)
-                SetSpawnMenu();
-        }
-
-        private void SetSpawnMenu()
+         }
+        
+        void SendClientReady()
         {
-            spawnMenu.GetComponent<SpawnMenu>().AnchorEstablished = AnchorEstablished;
-
-            if (!isServer)
-                spawnMenu.SetActive(false);
-
-            spawnMenuIsSet = true;
+            NetworkHelper._Instance.CmdSendClientReady();
         }
 
         /// <summary>
@@ -329,7 +324,6 @@ namespace HoloToolkit.Unity.SharingWithUNET
             GetComponentInChildren<MeshRenderer>().material.color = Color.blue;
         }
 
-      
         [Command]
         private void CmdSendSharedTransform(GameObject target, Vector3 pos, Quaternion rot)
         {
@@ -517,6 +511,32 @@ namespace HoloToolkit.Unity.SharingWithUNET
             GameController gameController = GameController.instance;
             CmdSetAuth(gameController.netId, GetComponent<NetworkIdentity>());
             gameController.CmdSetWaves(m1_point1, m1_point2, m2_point1, m2_point2);
+        }
+
+        public void PressPanelBtn(string panelBtn)
+        {
+            CmdPressPanelBtn(panelBtn);
+        }
+
+        [Command]
+        void CmdPressPanelBtn(string panelBtn)
+        {
+            GameController gameController = GameController.instance;
+            CmdSetAuth(gameController.netId, GetComponent<NetworkIdentity>());
+            gameController.CmdPressPanelBtn(panelBtn);
+        }
+
+        public void OnPinEnter(bool pinCorrect)
+        {
+            CmdOnPinEnter(pinCorrect);
+        }
+
+        [Command]
+        void CmdOnPinEnter(bool correctPin)
+        {
+            GameController gameController = GameController.instance;
+            CmdSetAuth(gameController.netId, GetComponent<NetworkIdentity>());
+            gameController.CmdOnPinEnter(correctPin);
         }
     }
 }

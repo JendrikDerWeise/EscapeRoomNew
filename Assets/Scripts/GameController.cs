@@ -6,6 +6,7 @@ using UnityEngine.Windows.Speech;
 using System.Linq;
 using HoloToolkit.Unity.SpatialMapping;
 using UnityEngine.Networking;
+using UnityEngine.SceneManagement;
 
 public class GameController : NetworkBehaviour {
     public static GameController instance;
@@ -58,7 +59,7 @@ public class GameController : NetworkBehaviour {
     public override void OnStartServer()
     {
         print("serveronstart");
-        MakeSolution();
+        
         currentTime = startingTime;
         multiplayerBox = MultiplayerBox._Instance;
     }
@@ -127,6 +128,7 @@ public class GameController : NetworkBehaviour {
         RpcStart();
         gameStarted = true;
         RpcStartNextPuzzle(0);
+        MakeSolution();
     }
 
     void KeywordReconizeOnPhraseReconized(PhraseRecognizedEventArgs args)
@@ -143,12 +145,11 @@ public class GameController : NetworkBehaviour {
     void Update () {
         if (!gameStarted)
             return;
-        
-        if(isServer)
-            win = CheckWinCondition();
+
+        if (win)
+            GameWon();
 
         CheckTimer();
-        
     }
 
     private string getTime()
@@ -180,7 +181,12 @@ public class GameController : NetworkBehaviour {
 
     private void GameOver()
     {
-        //TODO GameOver Screen, Optionen zum Neustart
+        SceneManager.LoadScene("Lose");
+    }
+
+    private void GameWon()
+    {
+        SceneManager.LoadScene("Win");
     }
 
     [Command]
@@ -197,13 +203,6 @@ public class GameController : NetworkBehaviour {
             sc.PlayClip(sc.raise);
             box.GetComponentInChildren<Box>().SpawnNextPuzzle(puzzleID);
             ShowNumber(puzzleID);
-            /*
-            if (round > 0)
-            {
-                box.GetComponentInChildren<Box>().ShowNextNumber(UnityEngine.Random.Range(0, 10));
-
-            }
-            round++;*/
         }
         else
             sc.PlayClip(sc.win);//WinScreen
@@ -272,17 +271,7 @@ public class GameController : NetworkBehaviour {
             visibleCode += "" + solution[i];
 
         box.GetComponentInChildren<Box>().ShowNextNumber(visibleCode);
-        /*
-        foreach (GameObject go in solvedPuzzles)
-        {
-            if (go.activeSelf)
-            {
-                int nextNumber = Array.FindIndex(solvedPuzzles, x => x.Equals(go));
-                box.GetComponentInChildren<Box>().ShowNextNumber(solution[nextNumber]);
-                //box.GetComponentInChildren<Box>().ShowNextNumber(UnityEngine.Random.Range(0, 10));
-            }
-            //box.GetComponentInChildren<Box>().ShowNextNumber(UnityEngine.Random.Range(0, 10));
-        }*/
+
     }
 
     public void PuzzleFail()
@@ -439,5 +428,28 @@ public class GameController : NetworkBehaviour {
         wp.m1_point2 = m1_point2;
         wp.m2_point1 = m2_point1;
         wp.m2_point2 = m2_point2;
+    }
+
+    [Command]
+    public void CmdPressPanelBtn(string panelBtn)
+    {
+        RpcPressPanelBtn(panelBtn);
+    }
+
+    [ClientRpc]
+    void RpcPressPanelBtn(string panelBtn)
+    {
+        if (doorlock == null)
+            doorlock = MultiplayerPanel._Instance.gameObject;
+        doorlock.GetComponent<MultiplayerPanel>().PressPanelBtn(panelBtn);
+    }
+
+    [Command]
+    public void CmdOnPinEnter(bool correctPin)
+    {
+        if (!correctPin)
+            PuzzleFail();
+
+        win = correctPin;
     }
 }

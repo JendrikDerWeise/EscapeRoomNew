@@ -30,6 +30,7 @@ using System.Collections;
  *  If you intend to build a character keyboard keep that in mind and possibly change them...
  * */
 public class PinCodeControl : MonoBehaviour {
+    public static PinCodeControl _Instance;
 	// Links to other relevant GameObjects
 	public Text GameObjDisplayText;
 
@@ -59,14 +60,24 @@ public class PinCodeControl : MonoBehaviour {
     private bool lockDisplayForInput;
     private float displayLockTime;
     private float timeForDisplayLock = 5.0f;
-	
 
-	// Use this for initialization
-	void Start () {
-		// get the implemented interface from door gameobject
-		
+    private HoloToolkit.Unity.SharingWithUNET.PlayerController player;
 
-		inputCode = "";
+    void Awake()
+    {
+        if (_Instance == null)
+            _Instance = this;
+
+        else if (_Instance != this)
+            Destroy(gameObject);
+    }
+
+    // Use this for initialization
+    void Start () {
+        // get the implemented interface from door gameobject
+
+        player = HoloToolkit.Unity.SharingWithUNET.PlayerController._Instance;
+        inputCode = "";
 		failedAttempts = 0;
 		allowNewCode = false;
 		setNewCode = false;
@@ -149,14 +160,16 @@ public class PinCodeControl : MonoBehaviour {
 				// failed attempt!
 				allowNewCode = false;
 				UpdateText(DisplayDenied);
-				
-				if(!noAudio)
+                player.OnPinEnter(false);
+
+                if (!noAudio)
 					AudioDenied.Play();
 			}else{
 				// grant access and reset attempt counter
 				allowNewCode = true;
 				UpdateText(DisplayGranted);
-				if(!noAudio)
+                player.OnPinEnter(true);
+                if (!noAudio)
 					AudioConfirm.Play ();
 			}
 		}

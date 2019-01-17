@@ -817,6 +817,7 @@
      <Compile Include="Assets\Scripts\Speech.cs" />
      <Compile Include="Assets\Scripts\SwitchPuzzle.cs" />
      <Compile Include="Assets\Scripts\TiltWindow.cs" />
+     <Compile Include="Assets\Scripts\Waiting.cs" />
      <Compile Include="Assets\Scripts\WinScript.cs" />
      <None Include="Assets\HoloToolkit\Utilities\Scripts\GLTF\Shaders\GLTFConstant.cginc" />
      <None Include="Assets\PinLockDoor\readme.txt" />

@@ -9,6 +9,7 @@ public class MultiplayerPanel : NetworkBehaviour {
     public static MultiplayerPanel _Instance;
     private Transform sharedWorldAnchorTransform;
 
+
     private bool receivedAuthority;
     
     [SyncVar]
@@ -96,5 +97,19 @@ public class MultiplayerPanel : NetworkBehaviour {
     public override void OnStopAuthority()
     {
         receivedAuthority = false;
+    }
+
+    public void PressPanelBtn(string panelBtn)
+    {
+        GameObject pinCodeControl = PinCodeControl._Instance.gameObject;
+
+        foreach (Transform btn in pinCodeControl.transform)
+        {
+            if (btn.tag.Equals("PinLockButton"))
+            {
+                if (btn.GetComponentInChildren<ButtonAction>().ButtonValue.Equals(panelBtn))
+                    btn.GetComponentInChildren<ButtonAction>().OnMouseDown();
+            }
+        }
     }
 }

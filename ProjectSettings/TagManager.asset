@@ -17,6 +17,7 @@ TagManager:
   - ElectricWave
   - NetworkSpawner
   - anchorflag
+  - Waiting
   layers:
   - Default
   - TransparentFX

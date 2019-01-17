@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.Networking;
 
 public class SpawnMenu : NetworkBehaviour {
+    public static SpawnMenu _Instance;
     /// <summary>
     /// The transform of the shared world anchor.
     /// </summary>
@@ -21,7 +22,16 @@ public class SpawnMenu : NetworkBehaviour {
     public GameObject boxPrefab;
     public GameObject panelPrefab;
     public NetworkHelper networkHelper;
-	
+
+    void Awake()
+    {
+        if (_Instance == null)
+            _Instance = this;
+
+        else if (_Instance != this)
+            Destroy(gameObject);
+    }
+
     void Start()
     {
         sharedWorldAnchorTransform = SharedCollection.Instance.gameObject.transform;

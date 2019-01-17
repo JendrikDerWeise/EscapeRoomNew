@@ -4,7 +4,7 @@
 Material:
   serializedVersion: 6
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: MenuBackground
   m_Shader: {fileID: 4800000, guid: d45c0efca53019e43891b0f610f8146e, type: 3}
@@ -61,6 +61,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - _AlbedoAlphaMode: 0
+    - _Ambient: 0.4
     - _BlendOp: 0
     - _BorderLight: 0
     - _BorderLightOpaque: 0
@@ -68,6 +69,7 @@ Material:
     - _BorderMinValue: 0.1
     - _BorderWidth: 0.1
     - _BumpScale: 1
+    - _CameraIntensity: 0.1
     - _ClippingPlane: 0
     - _ClippingPlaneBorder: 0
     - _ClippingPlaneBorderWidth: 0.025
@@ -94,6 +96,7 @@ Material:
     - _HoverLight: 1
     - _HoverLightOpaque: 0
     - _InnerGlow: 0
+    - _LightIntensity: 0.4
     - _Metallic: 0
     - _Mode: 0
     - _NearPlaneFade: 0
@@ -127,4 +130,5 @@ Material:
     - _HoverColorOpaqueOverride: {r: 1, g: 1, b: 1, a: 1}
     - _HoverColorOverride: {r: 1, g: 1, b: 1, a: 1}
     - _InnerGlowColor: {r: 1, g: 1, b: 1, a: 0.75}
+    - _LightDir: {r: 0.3, g: 0.8, b: -0.6, a: 1}
     - _RimColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}

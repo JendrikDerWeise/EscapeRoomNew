@@ -9,5 +9,11 @@ sceneSetups:
   isLoaded: 0
   isActive: 0
 - path: Assets/HoloToolkit-Examples/SharingWithUNET/Scenes/SharingWithUnetExample.unity
+  isLoaded: 1
+  isActive: 0
+- path: Assets/Scenes/Win.unity
+  isLoaded: 0
+  isActive: 0
+- path: Assets/Scenes/Lose.unity
   isLoaded: 0
   isActive: 0

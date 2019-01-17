@@ -22,7 +22,7 @@ public class ElectricWave_ClickObjectWheel : MonoBehaviour
     private bool inputDown;
 
     private float time = 0.0f;
-    public float interpolationPeriod = 0.1f;
+    public float interpolationPeriod = 0.2f;
 
 
     private void Start()
