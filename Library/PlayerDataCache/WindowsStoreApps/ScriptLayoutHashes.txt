@@ -562,7 +562,7 @@ f63de675a7247ac274413082538197d4 Assembly-CSharp.dll:HoloToolkit.Examples.Protot
 d3a3c5ed72e0d65a812b954ce8a31547 Assembly-CSharp.dll:HoloToolkit.Examples.InteractiveElements.ElementSelectedActiveWidget
 27813a932870b6ac2d34332e7547bd33 Assembly-CSharp.dll:HoloToolkit.Examples.InteractiveElements.ButtonThemeWidgetOutline
 e49412af80e61d0737af8c45c579d5ea Assembly-CSharp.dll:HoloToolkit.Unity.InputModule.TriggerButton
-5828fd16437cd336d636042f57960a97 Assembly-CSharp.dll:HoloToolkit.Unity.SharingWithUNET.PlayerController
+920a026146ce91080f074da014e53241 Assembly-CSharp.dll:HoloToolkit.Unity.SharingWithUNET.PlayerController
 99d3f5c40dd99d0e237814704e8c7f9c Assembly-CSharp.dll:HoloToolkit.Examples.InteractiveElements.InteractiveGroup
 a29ae484136752212ae18216426d8be8 Assembly-CSharp.dll:HoloToolkit.Unity.Receivers.ToggleActiveReceiver
 542802093717bb67c55d9f4b6553fd6c Assembly-CSharp.dll:HoloToolkit.Unity.InputModule.Examples.Grabbables.GrabbableMultiJoint
@@ -658,6 +658,7 @@ c4f20aeab29ef98b1a349f65a9b6f317 Assembly-CSharp.dll:HoloToolkit.Unity.InputModu
 f63de675a7247ac274413082538197d4 Assembly-CSharp.dll:HoloToolkit.Examples.Prototyping.CycleDots
 797090f1d128e837646cbbdaa2b00830 Assembly-CSharp.dll:UnityGLTF.GLTFComponent
 3c12c2361fa5bc0730290d926ab744b2 Assembly-CSharp.dll:HoloToolkit.Unity.UX.BoundingBoxRig
+486cd95c82d8305219c352c06b776e1f Assembly-CSharp.dll:.OnSinglePlayerClicked
 83ef9b122527554e3853756e72113765 Assembly-CSharp.dll:.SwitchPuzzle
 cb49de743470b7249b589b96892d6841 Assembly-CSharp.dll:.PinCodeControl
 486cd95c82d8305219c352c06b776e1f Assembly-CSharp.dll:HoloToolkit.Sharing.Tests.RemoteHeadManager
@@ -702,4 +703,3 @@ c1087bf328bbb39eba5a09f26c3b6368 Vuforia.UnityExtensions.dll:Vuforia.MultiTarget
 c8a41ce4eea7677f6dd2aa0e422a2f04 Vuforia.UnityExtensions.dll:Vuforia.VuMarkBehaviour
 c31ff9acb65f7a15b5c6fd77c3314d83 Vuforia.UnityExtensions.dll:Vuforia.WireframeBehaviour
 486cd95c82d8305219c352c06b776e1f Vuforia.UnityExtensions.dll:Vuforia.WireframeTrackableEventHandler
-486cd95c82d8305219c352c06b776e1f Assembly-CSharp.dll:.OnSinglePlayerClicked

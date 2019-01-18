@@ -45,7 +45,13 @@ public class NetworkHelper : NetworkBehaviour {
     }
 
     [ClientRpc]
-    void RpcClientStart() { 
+    void RpcClientStart() {
+        if (panel == null)
+            panel = MultiplayerPanel._Instance.gameObject;
+
+        if (box == null)
+            box = MultiplayerBox._Instance.gameObject;
+
         panel.GetComponent<TapToPlace>().enabled = false;
         box.GetComponent<TapToPlace>().enabled = false;
         panel.GetComponent<BoxCollider>().enabled = false;
@@ -66,12 +72,23 @@ public class NetworkHelper : NetworkBehaviour {
         anchorsEstablished = value;
         print("anchors established nwhelper: " + anchorsEstablished);
 
-        if(anchorsEstablished == 1)
+        if(anchorsEstablished >= 1)
         {
             if (isServer)
                 spawnMenu.SetActive(true);
 
             waitingThing.SetActive(false);
+            //RpcHookReplacement();
         }
+    }
+
+    /// <summary>
+    /// Weil der Hook auf dem Client nicht feuert, hier eine Funktion um das auszugleichen.
+    /// UNET ist wirklich ätzend.
+    /// </summary>
+    void RpcHookReplacement()
+    {
+        if(!isServer)
+            waitingThing.SetActive(false);
     }
 }

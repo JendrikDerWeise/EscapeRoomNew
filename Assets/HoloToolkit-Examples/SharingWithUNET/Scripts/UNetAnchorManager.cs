@@ -517,7 +517,7 @@ namespace HoloToolkit.Unity.SharingWithUNET
 
         void SendClientReady()
         {
-            NetworkHelper._Instance.CmdSendClientReady();
+            PlayerController._Instance.SendClientReady();
         }
 
         /// <summary>

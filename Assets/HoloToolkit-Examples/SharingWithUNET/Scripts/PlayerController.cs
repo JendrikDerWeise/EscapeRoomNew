@@ -76,7 +76,7 @@ namespace HoloToolkit.Unity.SharingWithUNET
         /// Tracks if the player associated with the script has found the shared anchor
         /// </summary>
         [SyncVar(hook = "AnchorEstablishedChanged")]
-        bool AnchorEstablished;
+        public bool AnchorEstablished;
 
         /// <summary>
         /// Sent from a local client to the host to update if the shared
@@ -90,6 +90,7 @@ namespace HoloToolkit.Unity.SharingWithUNET
             
             if (Established && SharesSpatialAnchors && !isLocalPlayer)
             {
+                NetworkHelper._Instance.CmdSendClientReady();
                 Debug.Log("remote device likes the anchor");
 #if UNITY_WSA
                 anchorManager.AnchorFoundRemotely();
@@ -278,9 +279,11 @@ namespace HoloToolkit.Unity.SharingWithUNET
 
          }
         
-        void SendClientReady()
+        public void SendClientReady()
         {
-            NetworkHelper._Instance.CmdSendClientReady();
+            NetworkHelper helper = NetworkHelper._Instance;
+            CmdSetAuth(helper.netId, GetComponent<NetworkIdentity>());
+            helper.CmdSendClientReady();
         }
 
         /// <summary>
@@ -538,5 +541,6 @@ namespace HoloToolkit.Unity.SharingWithUNET
             CmdSetAuth(gameController.netId, GetComponent<NetworkIdentity>());
             gameController.CmdOnPinEnter(correctPin);
         }
+
     }
 }
