@@ -11,3 +11,9 @@ sceneSetups:
 - path: Assets/Scenes/Lose.unity
   isLoaded: 0
   isActive: 0
+- path: Assets/Scenes/Scene1.unity
+  isLoaded: 0
+  isActive: 0
+- path: Assets/Scenes/New Scene.unity
+  isLoaded: 0
+  isActive: 0
